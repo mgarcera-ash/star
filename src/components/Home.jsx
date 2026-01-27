@@ -78,16 +78,12 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       {/* Header */}
       <header className="text-white py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <p className="text-lg text-white/70 mb-2 drop-shadow">{getGreeting()}! 👋</p>
-          <h1 className="text-5xl md:text-6xl font-bold mb-3 drop-shadow-lg">
-            STAR Tools
-          </h1>
-          <p className="text-xl md:text-2xl text-white/95 font-medium drop-shadow">
-            Shelter, Transport, and Response
-          </p>
-          <p className="text-base text-white/80 mt-2 drop-shadow">
-            Staff Resources by A Safe Haven
-          </p>
+          <p className="text-lg text-white/70 mb-4 drop-shadow">{getGreeting()}! 👋</p>
+          <img
+            src="/star-logo.png"
+            alt="STAR Tools - Shelter, Transport, and Response - Staff Resources by A Safe Haven"
+            className="h-32 md:h-40 w-auto drop-shadow-2xl"
+          />
         </div>
       </header>
 
