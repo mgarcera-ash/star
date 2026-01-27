@@ -110,14 +110,9 @@ const ScriptBuilder = ({ onBack }) => {
   const nodes = getAllNodes()
 
   return (
-    <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-ash-navy mb-2">Script Builder</h3>
-        <p className="text-gray-600">Build your call script step-by-step based on the caller's needs</p>
-      </div>
-
+    <>
       {/* Tip */}
-      <div className="mb-6 glass-card border-l-4 border-ash-teal p-6 rounded-2xl bg-white/50">
+      <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
         <p className="text-base text-gray-800 leading-relaxed">
           <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member you have <strong>power</strong> because you hold the information needed to get someone to safety. People who have been living in crisis may not have spare patience to give you, even if you give them all of yours.
           <br /><br />
@@ -125,8 +120,14 @@ const ScriptBuilder = ({ onBack }) => {
         </p>
       </div>
 
-      {/* Script Nodes */}
-      <ol className="space-y-5">
+      <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold text-ash-navy mb-2">Script Builder</h3>
+          <p className="text-gray-600">Build your call script step-by-step based on the caller's needs</p>
+        </div>
+
+        {/* Script Nodes */}
+        <ol className="space-y-5">
         {nodes.map((node, index) => (
           <li key={node.id} className="flex flex-col">
             <div className="flex">
@@ -202,7 +203,8 @@ const ScriptBuilder = ({ onBack }) => {
           </button>
         </div>
       )}
-    </div>
+      </div>
+    </>
   )
 }
 
