@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { BsTelephoneInboundFill, BsChatSquareDots } from 'react-icons/bs'
+import { FaNotesMedical } from 'react-icons/fa'
 import SearchOverlay from './SearchOverlay'
 
 const Home = ({ onNavigate, recentlyAccessed = [] }) => {
@@ -52,9 +53,9 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       id: 'dap',
       title: 'DAP Note Helper',
       description: 'Generate properly formatted DAP notes',
-      icon: '📝',
+      icon: <FaNotesMedical className="w-full h-full" />,
       gradient: 'from-ash-accent to-ash-navy',
-      ready: false
+      ready: true
     },
     {
       id: 'spanish',
