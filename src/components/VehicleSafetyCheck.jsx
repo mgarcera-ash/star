@@ -1,124 +1,329 @@
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Suspense, useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import SearchOverlay from './SearchOverlay'
+import * as THREE from 'three'
 
 // 3D Vehicle Model Component
 function VehicleModel() {
   try {
     const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
-    return <primitive object={scene} scale={1.5} position={[0, -1, 0]} />
+    return <primitive object={scene} scale={2} position={[0, -1.5, 0]} />
   } catch (error) {
     console.error('Error loading 3D model:', error)
     return null
   }
 }
 
+// Animated Camera Controller
+function CameraController({ targetPosition, targetLookAt }) {
+  const controlsRef = useRef()
+
+  useFrame(() => {
+    if (controlsRef.current && targetPosition && targetLookAt) {
+      // Smoothly move camera
+      controlsRef.current.object.position.lerp(
+        new THREE.Vector3(...targetPosition),
+        0.05
+      )
+
+      // Smoothly move target
+      const currentTarget = controlsRef.current.target
+      currentTarget.lerp(new THREE.Vector3(...targetLookAt), 0.05)
+      controlsRef.current.update()
+    }
+  })
+
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enableZoom={true}
+      enablePan={true}
+      minDistance={3}
+      maxDistance={20}
+      maxPolarAngle={Math.PI / 2}
+    />
+  )
+}
+
 // Main Component
 const VehicleSafetyCheck = ({ onBack }) => {
+  const [selectedCheckpoint, setSelectedCheckpoint] = useState(null)
+  const [cameraTarget, setCameraTarget] = useState({
+    position: [6, 3, 6],
+    lookAt: [0, 0, 0]
+  })
+
+  // Inspection checkpoints with camera positions
+  const checkpoints = [
+    {
+      id: 'tires',
+      title: 'Tires & Wheels',
+      icon: '🛞',
+      camera: { position: [-3, 0, 4], lookAt: [-1, -1, 1] },
+      items: [
+        'Tire inflation adequate (all 4)',
+        'Tread depth sufficient',
+        'No sidewall damage or bulges',
+        'Lug nuts tight and secure',
+        'Check for any foreign objects'
+      ]
+    },
+    {
+      id: 'front-lights',
+      title: 'Front Lights',
+      icon: '💡',
+      camera: { position: [0, 1, 5], lookAt: [0, 0.5, 2] },
+      items: [
+        'Headlights working (low and high beam)',
+        'Turn signals functioning',
+        'Fog lights operational (if equipped)',
+        'No cracks in lenses',
+        'All bulbs properly seated'
+      ]
+    },
+    {
+      id: 'rear-lights',
+      title: 'Rear Lights',
+      icon: '🔴',
+      camera: { position: [0, 1, -5], lookAt: [0, 0.5, -2] },
+      items: [
+        'Brake lights working',
+        'Tail lights functioning',
+        'Turn signals operational',
+        'Reverse lights working',
+        'License plate light on'
+      ]
+    },
+    {
+      id: 'mirrors',
+      title: 'Mirrors & Windows',
+      icon: '🪟',
+      camera: { position: [-4, 2, 2], lookAt: [-1.5, 1, 0] },
+      items: [
+        'Side mirrors clean and adjusted',
+        'Rearview mirror adjusted properly',
+        'No cracks in windshield',
+        'All windows clean',
+        'No obstructions to visibility'
+      ]
+    },
+    {
+      id: 'body',
+      title: 'Body & Doors',
+      icon: '🚐',
+      camera: { position: [5, 1, 0], lookAt: [0, 0.5, 0] },
+      items: [
+        'All doors secure and lock properly',
+        'No visible body damage',
+        'Sliding door operates smoothly',
+        'Rear doors close and latch',
+        'Fuel cap secure'
+      ]
+    },
+    {
+      id: 'engine',
+      title: 'Under the Hood',
+      icon: '🔧',
+      camera: { position: [0, 2, 4], lookAt: [0, 0.5, 2] },
+      items: [
+        'Oil level adequate (check dipstick)',
+        'Coolant level sufficient',
+        'Brake fluid at proper level',
+        'Power steering fluid adequate',
+        'Windshield washer fluid filled',
+        'Battery terminals clean and tight',
+        'No visible leaks or damage'
+      ]
+    },
+    {
+      id: 'interior',
+      title: 'Inside the Cab',
+      icon: '🪑',
+      camera: { position: [3, 1.5, 3], lookAt: [0, 0.5, 0] },
+      items: [
+        'Steering operates smoothly',
+        'Seatbelt functional (no frays)',
+        'Seatbelt latches and retracts',
+        'Seats adjusted and secure',
+        'Dashboard warning lights check',
+        'Horn works',
+        'Wipers and washers functional'
+      ]
+    },
+    {
+      id: 'safety',
+      title: 'Safety Equipment',
+      icon: '🚑',
+      camera: { position: [0, 1, -4], lookAt: [0, 0, -1] },
+      items: [
+        'First aid kit present',
+        'First aid kit properly stocked',
+        'Fire extinguisher accessible',
+        'Emergency triangle/flares',
+        'Flashlight with working batteries'
+      ]
+    },
+    {
+      id: 'documentation',
+      title: 'Documentation',
+      icon: '📋',
+      camera: { position: [2, 1.5, 3], lookAt: [0, 0.5, 0] },
+      items: [
+        'Insurance card present and current',
+        'Registration present and current',
+        'Vehicle inspection sticker valid',
+        'Telematics device functioning',
+        'Duty status set correctly'
+      ]
+    }
+  ]
+
+  const handleCheckpointClick = (checkpoint) => {
+    setSelectedCheckpoint(checkpoint)
+    setCameraTarget({
+      position: checkpoint.camera.position,
+      lookAt: checkpoint.camera.lookAt
+    })
+  }
+
+  const handleReset = () => {
+    setSelectedCheckpoint(null)
+    setCameraTarget({
+      position: [6, 3, 6],
+      lookAt: [0, 0, 0]
+    })
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="text-white py-8 px-6">
+      <header className="text-white py-6 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
             Vehicle Safety Check
           </h1>
           <p className="text-white/90 text-lg mt-2 drop-shadow">
-            3D model of Chevrolet Express / GMC Savana 2500 Cargo Van
+            Interactive 3D inspection guide
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow py-8 px-6 pb-24 md:pb-8">
+      <main className="flex-grow py-6 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
-          <div className="glass-card-strong rounded-2xl shadow-2xl p-8 mb-6">
-            <h2 className="text-2xl font-bold text-ash-navy mb-4">Interactive 3D Model</h2>
-            <p className="text-gray-700 mb-6">
-              Explore the vehicle from all angles. Use your mouse to rotate, zoom, and pan around the model.
-            </p>
-
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* 3D Viewer */}
-            <div className="relative h-[600px] bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl overflow-hidden">
-              <Suspense
-                fallback={
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">🔄</div>
-                      <div className="text-gray-700 text-xl font-semibold">Loading 3D model...</div>
-                      <div className="text-gray-600 text-sm mt-2">This may take a moment</div>
+            <div className="lg:col-span-2">
+              <div className="glass-card-strong rounded-2xl shadow-2xl p-6">
+                <div className="relative h-[600px] bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl overflow-hidden">
+                  <Suspense
+                    fallback={
+                      <div className="h-full flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-6xl mb-4">🔄</div>
+                          <div className="text-gray-700 text-xl font-semibold">Loading 3D model...</div>
+                          <div className="text-gray-600 text-sm mt-2">This may take a moment</div>
+                        </div>
+                      </div>
+                    }
+                  >
+                    <Canvas camera={{ position: [6, 3, 6], fov: 60 }}>
+                      <ambientLight intensity={0.8} />
+                      <directionalLight position={[10, 10, 5]} intensity={1.2} />
+                      <directionalLight position={[-10, 5, -5]} intensity={0.6} />
+                      <directionalLight position={[0, -5, 0]} intensity={0.4} />
+
+                      <VehicleModel />
+
+                      <CameraController
+                        targetPosition={cameraTarget.position}
+                        targetLookAt={cameraTarget.lookAt}
+                      />
+                    </Canvas>
+                  </Suspense>
+
+                  {/* Controls Info */}
+                  <div className="absolute top-4 left-4 glass-card-strong rounded-xl p-3 shadow-lg">
+                    <div className="text-xs font-semibold text-ash-navy mb-1">Controls:</div>
+                    <div className="text-xs text-gray-700">
+                      🖱️ Drag to rotate • Scroll to zoom
                     </div>
                   </div>
-                }
-              >
-                <Canvas
-                  camera={{ position: [5, 2, 5], fov: 50 }}
-                >
-                  <ambientLight intensity={0.8} />
-                  <directionalLight position={[10, 10, 5]} intensity={1} />
-                  <directionalLight position={[-10, -10, -5]} intensity={0.5} />
 
-                  <VehicleModel />
+                  {/* Reset Button */}
+                  {selectedCheckpoint && (
+                    <div className="absolute top-4 right-4">
+                      <button
+                        onClick={handleReset}
+                        className="glass-card-strong px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all font-semibold text-ash-navy text-sm"
+                      >
+                        Reset View
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
 
-                  <OrbitControls
-                    enableZoom={true}
-                    enablePan={true}
-                    minDistance={3}
-                    maxDistance={15}
-                    maxPolarAngle={Math.PI / 2}
-                  />
-                </Canvas>
-              </Suspense>
+            {/* Checkpoints Panel */}
+            <div className="lg:col-span-1">
+              <div className="glass-card-strong rounded-2xl shadow-2xl p-6">
+                <h2 className="text-2xl font-bold text-ash-navy mb-4">Inspection Points</h2>
+                <p className="text-gray-600 text-sm mb-4">
+                  Click a checkpoint to view that area of the vehicle and see what to inspect.
+                </p>
 
-              {/* Controls Info */}
-              <div className="absolute bottom-4 left-4 glass-card-strong rounded-xl p-4 shadow-lg">
-                <div className="text-xs font-semibold text-ash-navy mb-2">Controls:</div>
-                <div className="text-xs text-gray-700 space-y-1">
-                  <div>🖱️ <strong>Left Click + Drag:</strong> Rotate</div>
-                  <div>🖱️ <strong>Right Click + Drag:</strong> Pan</div>
-                  <div>🖱️ <strong>Scroll:</strong> Zoom in/out</div>
-                  <div>📱 <strong>Touch:</strong> Pinch to zoom</div>
+                <div className="space-y-2 max-h-[520px] overflow-y-auto">
+                  {checkpoints.map((checkpoint) => (
+                    <button
+                      key={checkpoint.id}
+                      onClick={() => handleCheckpointClick(checkpoint)}
+                      className={`w-full p-4 rounded-xl text-left transition-all shadow-md hover:shadow-lg ${
+                        selectedCheckpoint?.id === checkpoint.id
+                          ? 'bg-ash-teal text-white'
+                          : 'bg-white/70 hover:bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">{checkpoint.icon}</span>
+                        <span className={`font-semibold ${
+                          selectedCheckpoint?.id === checkpoint.id ? 'text-white' : 'text-ash-navy'
+                        }`}>
+                          {checkpoint.title}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Vehicle Info */}
-          <div className="glass-card-strong rounded-2xl shadow-xl p-8">
-            <h3 className="text-2xl font-bold text-ash-navy mb-4">Vehicle Information</h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold text-ash-teal mb-2">Make & Model</h4>
-                <p className="text-gray-700">Chevrolet Express / GMC Savana 2500</p>
+          {/* Selected Checkpoint Details */}
+          {selectedCheckpoint && (
+            <div className="mt-6 glass-card-strong rounded-2xl shadow-2xl p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-5xl">{selectedCheckpoint.icon}</span>
+                <div>
+                  <h3 className="text-3xl font-bold text-ash-navy">{selectedCheckpoint.title}</h3>
+                  <p className="text-gray-600">Inspection checklist</p>
+                </div>
               </div>
 
-              <div>
-                <h4 className="font-semibold text-ash-teal mb-2">Type</h4>
-                <p className="text-gray-700">Cargo Van</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-ash-teal mb-2">Year</h4>
-                <p className="text-gray-700">2003 Model</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-ash-teal mb-2">Usage</h4>
-                <p className="text-gray-700">STAR Program Transport</p>
+              <div className="bg-white/50 rounded-xl p-6">
+                <h4 className="font-semibold text-ash-navy mb-3">What to check:</h4>
+                <ul className="space-y-2">
+                  {selectedCheckpoint.items.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-ash-teal mt-1">✓</span>
+                      <span className="text-gray-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <h4 className="font-semibold text-ash-teal mb-3">About This Model</h4>
-              <p className="text-gray-700 leading-relaxed">
-                This 3D model represents the actual vehicle used by the A Safe Haven STAR Program
-                for client transportation and service delivery. The model can be rotated and viewed
-                from all angles to familiarize staff with the vehicle's appearance and dimensions.
-              </p>
-            </div>
-          </div>
+          )}
         </div>
       </main>
 
