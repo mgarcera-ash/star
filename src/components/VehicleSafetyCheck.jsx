@@ -1,6 +1,6 @@
 import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import SearchOverlay from './SearchOverlay'
 
 // 3D Vehicle Model Component with auto-rotation
@@ -19,7 +19,7 @@ function VehicleModel() {
 
     return (
       <group ref={modelRef}>
-        <primitive object={scene} scale={150} position={[0, -15, 0]} />
+        <primitive object={scene} scale={300} position={[0, -20, 0]} />
       </group>
     )
   } catch (error) {
@@ -163,107 +163,94 @@ const VehicleSafetyCheck = ({ onBack }) => {
       {/* Main Content */}
       <main className="flex-grow py-6 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
-          {/* 3D Model Viewer */}
-          <div className="glass-card-strong rounded-2xl shadow-2xl p-6 mb-8">
-            <div className="relative h-[500px] bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl overflow-hidden">
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column - Floating 3D Model */}
+            <div className="relative h-[800px]">
               <Suspense
                 fallback={
                   <div className="h-full flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-6xl mb-4">🔄</div>
-                      <div className="text-gray-700 text-xl font-semibold">Loading 3D model...</div>
-                      <div className="text-gray-600 text-sm mt-2">This may take a moment</div>
+                      <div className="text-white text-xl font-semibold drop-shadow">Loading 3D model...</div>
+                      <div className="text-white/80 text-sm mt-2 drop-shadow">This may take a moment</div>
                     </div>
                   </div>
                 }
               >
-                <Canvas camera={{ position: [50, 30, 50], fov: 50 }}>
-                  <ambientLight intensity={0.9} />
-                  <directionalLight position={[20, 20, 10]} intensity={1.5} />
-                  <directionalLight position={[-20, 10, -10]} intensity={0.8} />
-                  <directionalLight position={[0, -10, 0]} intensity={0.5} />
+                <Canvas camera={{ position: [80, 50, 80], fov: 50 }}>
+                  <ambientLight intensity={1.2} />
+                  <directionalLight position={[30, 30, 20]} intensity={2} />
+                  <directionalLight position={[-30, 20, -20]} intensity={1.2} />
+                  <directionalLight position={[0, -20, 0]} intensity={0.8} />
+                  <spotLight position={[0, 50, 0]} intensity={1.5} angle={0.5} penumbra={1} />
 
                   <VehicleModel />
-
-                  <OrbitControls
-                    enableZoom={true}
-                    enablePan={false}
-                    enableRotate={true}
-                    minDistance={30}
-                    maxDistance={100}
-                    maxPolarAngle={Math.PI / 2}
-                  />
                 </Canvas>
               </Suspense>
+            </div>
 
-              {/* Controls Info */}
-              <div className="absolute top-4 left-4 glass-card-strong rounded-xl p-3 shadow-lg">
-                <div className="text-xs font-semibold text-ash-navy mb-1">Model Info:</div>
-                <div className="text-xs text-gray-700">
-                  🔄 Auto-rotating • Drag to control
-                </div>
+            {/* Right Column - Inspection Checkpoints */}
+            <div className="space-y-4">
+              <div className="mb-6">
+                <h2 className="text-3xl font-bold text-white mb-2 drop-shadow">
+                  Inspection Checkpoints
+                </h2>
+                <p className="text-base text-white/90 drop-shadow">
+                  Click any checkpoint to view detailed inspection items.
+                </p>
+              </div>
+
+              <div className="space-y-3 max-h-[730px] overflow-y-auto pr-2">
+                {checkpoints.map((checkpoint) => (
+                  <details
+                    key={checkpoint.id}
+                    className="glass-card-strong rounded-2xl shadow-xl overflow-hidden group"
+                  >
+                    <summary className="cursor-pointer p-5 hover:bg-white/50 transition-all list-none">
+                      <div className="flex items-center gap-4">
+                        <span className="text-4xl">{checkpoint.icon}</span>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-ash-navy group-open:text-ash-teal transition-colors">
+                            {checkpoint.title}
+                          </h3>
+                          <p className="text-xs text-gray-600 mt-1">
+                            {checkpoint.items.length} items to check
+                          </p>
+                        </div>
+                        <svg
+                          className="w-6 h-6 text-ash-teal transition-transform group-open:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2.5}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </div>
+                    </summary>
+
+                    <div className="px-5 pb-5 pt-2">
+                      <div className="bg-white/50 rounded-xl p-4">
+                        <h4 className="font-semibold text-ash-navy mb-3 text-sm">What to check:</h4>
+                        <ul className="space-y-2">
+                          {checkpoint.items.map((item, index) => (
+                            <li key={index} className="flex items-start gap-2 text-sm">
+                              <span className="text-ash-teal mt-0.5 flex-shrink-0">✓</span>
+                              <span className="text-gray-700">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+                ))}
               </div>
             </div>
-          </div>
-
-          {/* Inspection Checkpoints */}
-          <div className="mb-6">
-            <h2 className="text-3xl font-bold text-white mb-3 drop-shadow">
-              Inspection Checkpoints
-            </h2>
-            <p className="text-lg text-white/90 drop-shadow mb-6">
-              Click any checkpoint below to view detailed inspection items.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {checkpoints.map((checkpoint) => (
-              <details
-                key={checkpoint.id}
-                className="glass-card-strong rounded-2xl shadow-xl overflow-hidden group"
-              >
-                <summary className="cursor-pointer p-6 hover:bg-white/50 transition-all list-none">
-                  <div className="flex items-center gap-4">
-                    <span className="text-5xl">{checkpoint.icon}</span>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-ash-navy group-open:text-ash-teal transition-colors">
-                        {checkpoint.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {checkpoint.items.length} items to check
-                      </p>
-                    </div>
-                    <svg
-                      className="w-6 h-6 text-ash-teal transition-transform group-open:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                </summary>
-
-                <div className="px-6 pb-6 pt-2">
-                  <div className="bg-white/50 rounded-xl p-4">
-                    <h4 className="font-semibold text-ash-navy mb-3 text-sm">What to check:</h4>
-                    <ul className="space-y-2">
-                      {checkpoint.items.map((item, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm">
-                          <span className="text-ash-teal mt-0.5 flex-shrink-0">✓</span>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </details>
-            ))}
           </div>
         </div>
       </main>
