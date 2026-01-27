@@ -12,8 +12,8 @@ export default {
         'ash-accent': '#2B4F73',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'display': ['Space Grotesk', 'system-ui', 'sans-serif'],
+        'sans': ['Google Sans', 'system-ui', 'sans-serif'],
+        'display': ['Google Sans', 'system-ui', 'sans-serif'],
       },
     },
   },
