@@ -103,13 +103,34 @@ const DispatchScripts = ({ onBack }) => {
         <div className="max-w-7xl mx-auto">
           {!selectedScenario && !showScriptBuilder ? (
             <>
-              {/* Scenario Selection */}
+              {/* Script Builder Button */}
               <div className="mb-8">
                 <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-                  Select a Scenario
+                  Build your script dynamically (recommended)
                 </h2>
-                <p className="text-lg text-white/90 drop-shadow">
-                  Choose the type of call you're handling
+                <button
+                  onClick={() => setShowScriptBuilder(true)}
+                  className="glass-card-strong px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl
+                           transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                >
+                  <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                    <FaWandMagicSparkles className="w-full h-full" />
+                  </span>
+                  <div className="text-left">
+                    <div className="font-bold text-ash-navy text-lg">Script Builder</div>
+                    <div className="text-sm text-gray-600">Build your script step-by-step as the call progresses.</div>
+                  </div>
+                </button>
+              </div>
+
+              {/* Scenario Selection */}
+              <div className="mb-8">
+                <div className="h-px bg-white/20 mb-8"></div>
+                <h3 className="text-2xl font-semibold text-white mb-3 drop-shadow">
+                  Or select a scenario
+                </h3>
+                <p className="text-lg text-white/90 drop-shadow mb-4">
+                  Choose the type of call you're handling.
                 </p>
               </div>
 
@@ -127,26 +148,19 @@ const DispatchScripts = ({ onBack }) => {
                     <span className="font-semibold text-ash-navy">{scenario.title}</span>
                   </button>
                 ))}
-              </div>
 
-              {/* Script Builder Button */}
-              <div className="mb-8">
-                <div className="h-px bg-white/20 mb-8"></div>
-                <h3 className="text-2xl font-semibold text-white mb-3 drop-shadow">
-                  Or build your script dynamically
-                </h3>
+                {/* More Button */}
                 <button
-                  onClick={() => setShowScriptBuilder(true)}
-                  className="glass-card-strong px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl
-                           transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                  className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg
+                           opacity-50 cursor-not-allowed flex items-center gap-3"
+                  disabled
                 >
                   <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
-                    <FaWandMagicSparkles className="w-full h-full" />
+                    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
                   </span>
-                  <div className="text-left">
-                    <div className="font-bold text-ash-navy text-lg">Script Builder</div>
-                    <div className="text-sm text-gray-600">Build your script step-by-step as the call progresses</div>
-                  </div>
+                  <span className="font-semibold text-ash-navy">More</span>
                 </button>
               </div>
             </>
