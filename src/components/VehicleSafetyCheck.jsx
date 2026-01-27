@@ -162,18 +162,18 @@ const VehicleSafetyCheck = ({ onBack }) => {
 
       {/* Main Content */}
       <main className="flex-grow px-6 pb-24 md:pb-8 -mt-2">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto -mt-4">
           {/* Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Floating 3D Model */}
-            <div className="relative h-[800px]">
+            <div className="relative h-[800px] -mt-2">
               <Suspense
                 fallback={
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">🔄</div>
-                      <div className="text-white text-xl font-semibold drop-shadow">Loading 3D model...</div>
-                      <div className="text-white/80 text-sm mt-2 drop-shadow">This may take a moment</div>
+                  <div className="h-full flex items-center justify-center glass-card-strong rounded-xl">
+                    <div className="text-center p-8">
+                      <div className="text-7xl mb-4 animate-spin">🔄</div>
+                      <div className="text-ash-navy text-2xl font-bold mb-2">Loading 3D Model</div>
+                      <div className="text-gray-600 text-base">Please wait while the vehicle loads...</div>
                     </div>
                   </div>
                 }
