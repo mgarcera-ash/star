@@ -80,7 +80,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
         <div className="max-w-7xl mx-auto">
           <p className="text-lg text-white/70 mb-4 drop-shadow">{getGreeting()}! 👋</p>
           <img
-            src="/star-logo.png"
+            src={`${import.meta.env.BASE_URL}star-logo.png`}
             alt="STAR Tools - Shelter, Transport, and Response - Staff Resources by A Safe Haven"
             className="h-32 md:h-40 w-auto drop-shadow-2xl"
           />
