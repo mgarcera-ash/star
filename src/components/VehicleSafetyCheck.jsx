@@ -19,7 +19,7 @@ function VehicleModel() {
 
     return (
       <group ref={modelRef}>
-        <primitive object={scene} scale={300} position={[0, -20, 0]} />
+        <primitive object={scene} scale={300} position={[0, -5, 0]} />
       </group>
     )
   } catch (error) {
@@ -178,7 +178,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
                   </div>
                 }
               >
-                <Canvas camera={{ position: [40, 25, 40], fov: 40 }}>
+                <Canvas camera={{ position: [30, 18, 30], fov: 35 }}>
                   <ambientLight intensity={1.2} />
                   <directionalLight position={[30, 30, 20]} intensity={2} />
                   <directionalLight position={[-30, 20, -20]} intensity={1.2} />
@@ -192,34 +192,34 @@ const VehicleSafetyCheck = ({ onBack }) => {
 
             {/* Right Column - Inspection Checkpoints */}
             <div className="space-y-4">
-              <div className="mb-6">
-                <h2 className="text-3xl font-bold text-white mb-2 drop-shadow">
+              <div className="mb-4">
+                <h2 className="text-2xl font-bold text-white mb-1 drop-shadow">
                   Inspection Checkpoints
                 </h2>
-                <p className="text-base text-white/90 drop-shadow">
+                <p className="text-sm text-white/90 drop-shadow">
                   Click any checkpoint to view detailed inspection items.
                 </p>
               </div>
 
-              <div className="space-y-3 max-h-[730px] overflow-y-auto pr-2">
+              <div className="space-y-2 max-h-[730px] overflow-y-auto pr-2">
                 {checkpoints.map((checkpoint) => (
                   <details
                     key={checkpoint.id}
-                    className="glass-card-strong rounded-2xl shadow-xl overflow-hidden group"
+                    className="glass-card-strong rounded-xl shadow-lg overflow-hidden group"
                   >
-                    <summary className="cursor-pointer p-5 hover:bg-white/50 transition-all list-none">
-                      <div className="flex items-center gap-4">
-                        <span className="text-4xl">{checkpoint.icon}</span>
+                    <summary className="cursor-pointer p-3 hover:bg-white/50 transition-all list-none">
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl">{checkpoint.icon}</span>
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold text-ash-navy group-open:text-ash-teal transition-colors">
+                          <h3 className="text-base font-bold text-ash-navy group-open:text-ash-teal transition-colors">
                             {checkpoint.title}
                           </h3>
-                          <p className="text-xs text-gray-600 mt-1">
-                            {checkpoint.items.length} items to check
+                          <p className="text-xs text-gray-600">
+                            {checkpoint.items.length} items
                           </p>
                         </div>
                         <svg
-                          className="w-6 h-6 text-ash-teal transition-transform group-open:rotate-180"
+                          className="w-5 h-5 text-ash-teal transition-transform group-open:rotate-180"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -234,13 +234,12 @@ const VehicleSafetyCheck = ({ onBack }) => {
                       </div>
                     </summary>
 
-                    <div className="px-5 pb-5 pt-2">
-                      <div className="bg-white/50 rounded-xl p-4">
-                        <h4 className="font-semibold text-ash-navy mb-3 text-sm">What to check:</h4>
-                        <ul className="space-y-2">
+                    <div className="px-3 pb-3 pt-1">
+                      <div className="bg-white/50 rounded-lg p-3">
+                        <ul className="grid grid-cols-1 gap-1.5">
                           {checkpoint.items.map((item, index) => (
-                            <li key={index} className="flex items-start gap-2 text-sm">
-                              <span className="text-ash-teal mt-0.5 flex-shrink-0">✓</span>
+                            <li key={index} className="flex items-start gap-2 text-xs">
+                              <span className="text-ash-teal mt-0.5 flex-shrink-0 text-sm">✓</span>
                               <span className="text-gray-700">{item}</span>
                             </li>
                           ))}
