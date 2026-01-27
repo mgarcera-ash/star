@@ -8,7 +8,7 @@ import * as THREE from 'three'
 function VehicleModel() {
   try {
     const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
-    return <primitive object={scene} scale={15} position={[0, -3, 0]} />
+    return <primitive object={scene} scale={60} position={[0, -8, 0]} />
   } catch (error) {
     console.error('Error loading 3D model:', error)
     return null
@@ -39,8 +39,8 @@ function CameraController({ targetPosition, targetLookAt }) {
       ref={controlsRef}
       enableZoom={true}
       enablePan={true}
-      minDistance={8}
-      maxDistance={30}
+      minDistance={20}
+      maxDistance={80}
       maxPolarAngle={Math.PI / 2}
     />
   )
@@ -50,7 +50,7 @@ function CameraController({ targetPosition, targetLookAt }) {
 const VehicleSafetyCheck = ({ onBack }) => {
   const [selectedCheckpoint, setSelectedCheckpoint] = useState(null)
   const [cameraTarget, setCameraTarget] = useState({
-    position: [12, 6, 12],
+    position: [35, 20, 35],
     lookAt: [0, 0, 0]
   })
 
@@ -60,7 +60,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'tires',
       title: 'Tires & Wheels',
       icon: '🛞',
-      camera: { position: [-8, 2, 10], lookAt: [-3, -2, 3] },
+      camera: { position: [-25, 8, 30], lookAt: [-10, -5, 10] },
       items: [
         'Tire inflation adequate (all 4)',
         'Tread depth sufficient',
@@ -73,7 +73,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'front-lights',
       title: 'Front Lights',
       icon: '💡',
-      camera: { position: [0, 3, 12], lookAt: [0, 0, 5] },
+      camera: { position: [0, 10, 40], lookAt: [0, 0, 15] },
       items: [
         'Headlights working (low and high beam)',
         'Turn signals functioning',
@@ -86,7 +86,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'rear-lights',
       title: 'Rear Lights',
       icon: '🔴',
-      camera: { position: [0, 3, -12], lookAt: [0, 0, -5] },
+      camera: { position: [0, 10, -40], lookAt: [0, 0, -15] },
       items: [
         'Brake lights working',
         'Tail lights functioning',
@@ -99,7 +99,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'mirrors',
       title: 'Mirrors & Windows',
       icon: '🪟',
-      camera: { position: [-10, 4, 6], lookAt: [-4, 2, 0] },
+      camera: { position: [-35, 15, 20], lookAt: [-12, 5, 0] },
       items: [
         'Side mirrors clean and adjusted',
         'Rearview mirror adjusted properly',
@@ -112,7 +112,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'body',
       title: 'Body & Doors',
       icon: '🚐',
-      camera: { position: [12, 3, 0], lookAt: [2, 0, 0] },
+      camera: { position: [40, 12, 0], lookAt: [8, 0, 0] },
       items: [
         'All doors secure and lock properly',
         'No visible body damage',
@@ -125,7 +125,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'engine',
       title: 'Under the Hood',
       icon: '🔧',
-      camera: { position: [0, 5, 10], lookAt: [0, 0, 4] },
+      camera: { position: [0, 18, 35], lookAt: [0, 2, 12] },
       items: [
         'Oil level adequate (check dipstick)',
         'Coolant level sufficient',
@@ -140,7 +140,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'interior',
       title: 'Inside the Cab',
       icon: '🪑',
-      camera: { position: [8, 4, 8], lookAt: [1, 0, 0] },
+      camera: { position: [25, 15, 25], lookAt: [3, 0, 0] },
       items: [
         'Steering operates smoothly',
         'Seatbelt functional (no frays)',
@@ -155,7 +155,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'safety',
       title: 'Safety Equipment',
       icon: '🚑',
-      camera: { position: [0, 3, -10], lookAt: [0, 0, -3] },
+      camera: { position: [0, 10, -35], lookAt: [0, 0, -10] },
       items: [
         'First aid kit present',
         'First aid kit properly stocked',
@@ -168,7 +168,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'documentation',
       title: 'Documentation',
       icon: '📋',
-      camera: { position: [6, 4, 8], lookAt: [0, 0, 0] },
+      camera: { position: [20, 15, 25], lookAt: [0, 0, 0] },
       items: [
         'Insurance card present and current',
         'Registration present and current',
@@ -190,7 +190,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
   const handleReset = () => {
     setSelectedCheckpoint(null)
     setCameraTarget({
-      position: [12, 6, 12],
+      position: [35, 20, 35],
       lookAt: [0, 0, 0]
     })
   }
@@ -228,7 +228,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
                       </div>
                     }
                   >
-                    <Canvas camera={{ position: [12, 6, 12], fov: 60 }}>
+                    <Canvas camera={{ position: [35, 20, 35], fov: 60 }}>
                       <ambientLight intensity={0.8} />
                       <directionalLight position={[10, 10, 5]} intensity={1.2} />
                       <directionalLight position={[-10, 5, -5]} intensity={0.6} />
