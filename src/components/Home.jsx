@@ -157,7 +157,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                   <div className="text-6xl mb-5 drop-shadow w-16 h-16 flex items-center justify-center text-ash-teal">
                     {tool.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-ash-navy mb-3">
+                  <h3 className="text-3xl font-staatliches text-ash-navy mb-3 tracking-wide uppercase">
                     {tool.title}
                   </h3>
                   <p className="text-gray-700 mb-4 text-base leading-relaxed">
@@ -171,7 +171,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                   )}
 
                   {tool.ready && (
-                    <div className="flex items-center text-ash-teal font-bold text-lg group-hover:translate-x-2 transition-transform">
+                    <div className="flex items-center text-ash-teal font-staatliches text-xl tracking-wide uppercase group-hover:translate-x-2 transition-transform">
                       Open Tool
                       <svg
                         className="w-6 h-6 ml-2"
