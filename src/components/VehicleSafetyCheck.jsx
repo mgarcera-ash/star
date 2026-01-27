@@ -2,6 +2,11 @@ import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import SearchOverlay from './SearchOverlay'
+import { GiCarWheel, GiGearStick, GiMirrorMirror, GiCarSeat } from 'react-icons/gi'
+import { PiHeadlights } from 'react-icons/pi'
+import { FaCarSide, FaOilCan } from 'react-icons/fa'
+import { MdHealthAndSafety } from 'react-icons/md'
+import { TiDocumentText } from 'react-icons/ti'
 
 // 3D Vehicle Model Component with auto-rotation
 function VehicleModel() {
@@ -35,7 +40,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'tires',
       title: 'Tires & Wheels',
-      icon: '🛞',
+      icon: <GiCarWheel className="w-full h-full" />,
       items: [
         'Tire inflation adequate (all 4)',
         'Tread depth sufficient',
@@ -47,7 +52,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'front-lights',
       title: 'Front Lights',
-      icon: '💡',
+      icon: <PiHeadlights className="w-full h-full" />,
       items: [
         'Headlights working (low and high beam)',
         'Turn signals functioning',
@@ -59,7 +64,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'rear-lights',
       title: 'Rear Lights',
-      icon: '🔴',
+      icon: <GiGearStick className="w-full h-full" />,
       items: [
         'Brake lights working',
         'Tail lights functioning',
@@ -71,7 +76,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'mirrors',
       title: 'Mirrors & Windows',
-      icon: '🪟',
+      icon: <GiMirrorMirror className="w-full h-full" />,
       items: [
         'Side mirrors clean and adjusted',
         'Rearview mirror adjusted properly',
@@ -83,7 +88,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'body',
       title: 'Body & Doors',
-      icon: '🚐',
+      icon: <FaCarSide className="w-full h-full" />,
       items: [
         'All doors secure and lock properly',
         'No visible body damage',
@@ -95,7 +100,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'engine',
       title: 'Under the Hood',
-      icon: '🔧',
+      icon: <FaOilCan className="w-full h-full" />,
       items: [
         'Oil level adequate (check dipstick)',
         'Coolant level sufficient',
@@ -109,7 +114,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'interior',
       title: 'Inside the Cab',
-      icon: '🪑',
+      icon: <GiCarSeat className="w-full h-full" />,
       items: [
         'Steering operates smoothly',
         'Seatbelt functional (no frays)',
@@ -123,7 +128,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'safety',
       title: 'Safety Equipment',
-      icon: '🚑',
+      icon: <MdHealthAndSafety className="w-full h-full" />,
       items: [
         'First aid kit present',
         'First aid kit properly stocked',
@@ -135,7 +140,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
     {
       id: 'documentation',
       title: 'Documentation',
-      icon: '📋',
+      icon: <TiDocumentText className="w-full h-full" />,
       items: [
         'Insurance card present and current',
         'Registration present and current',
@@ -149,7 +154,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="text-white pt-6 pb-2 px-6">
+      <header className="text-white pt-4 pb-1 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
             Vehicle Safety Check
@@ -161,12 +166,12 @@ const VehicleSafetyCheck = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow px-6 pb-24 md:pb-8 -mt-2">
-        <div className="max-w-7xl mx-auto -mt-4">
+      <main className="flex-grow px-6 pb-24 md:pb-8 -mt-4">
+        <div className="max-w-7xl mx-auto -mt-6">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Floating 3D Model */}
-            <div className="relative h-[800px] -mt-2">
+            <div className="relative h-[800px] -mt-4">
               <Suspense
                 fallback={
                   <div className="h-full flex items-center justify-center glass-card-strong rounded-xl">
@@ -206,12 +211,14 @@ const VehicleSafetyCheck = ({ onBack }) => {
                   >
                     <div className="p-3">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-3xl">{checkpoint.icon}</span>
+                        <div className="w-8 h-8 text-ash-teal flex-shrink-0">
+                          {checkpoint.icon}
+                        </div>
                         <h3 className="text-base font-bold text-ash-navy">
                           {checkpoint.title}
                         </h3>
                       </div>
-                      <ul className="space-y-1 ml-12">
+                      <ul className="space-y-1 ml-11">
                         {checkpoint.items.map((item, index) => (
                           <li key={index} className="flex items-start gap-2 text-xs">
                             <span className="text-ash-teal mt-0.5 flex-shrink-0 text-sm">✓</span>
