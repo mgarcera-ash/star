@@ -82,12 +82,9 @@ const DispatchScripts = ({ onBack }) => {
       {/* Header */}
       <header className="text-white py-8 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold drop-shadow-lg">
-            📋 Dispatch Scripts
+          <h1 className="text-5xl font-staatliches drop-shadow-lg tracking-wide">
+            DISPATCH SCRIPTS
           </h1>
-          <p className="text-white/90 mt-2 text-lg drop-shadow">
-            Quick reference for common call scenarios
-          </p>
         </div>
       </header>
 
@@ -211,13 +208,13 @@ const DispatchScripts = ({ onBack }) => {
       {/* Floating Back Button */}
       <button
         onClick={selectedScenario ? () => setSelectedScenario(null) : onBack}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-white text-ash-navy rounded-full
-                   shadow-2xl hover:scale-110 transition-transform duration-200 flex items-center
-                   justify-center font-bold group"
+        className="fixed bottom-6 left-6 z-50 px-6 py-3 bg-ash-navy text-white rounded-full
+                   shadow-2xl hover:scale-110 transition-all duration-200 flex items-center
+                   gap-2 font-semibold group"
         aria-label="Go back"
       >
         <svg
-          className="w-6 h-6 group-hover:-translate-x-1 transition-transform"
+          className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -229,6 +226,7 @@ const DispatchScripts = ({ onBack }) => {
             d="M15 19l-7-7 7-7"
           />
         </svg>
+        <span>Back</span>
       </button>
 
       {/* Search Overlay */}
