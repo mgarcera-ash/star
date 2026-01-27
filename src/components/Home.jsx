@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { BsTelephoneInboundFill, BsChatSquareDots } from 'react-icons/bs'
-import HelpOverlay from './HelpOverlay'
+import SearchOverlay from './SearchOverlay'
 
 const Home = ({ onNavigate, recentlyAccessed = [] }) => {
   // Get time-aware greeting
@@ -90,15 +90,6 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       {/* Main Content */}
       <main className="flex-grow py-8 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-10">
-            <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-              {getGreeting()}, how can I help?
-            </h2>
-            <p className="text-lg text-white/90 drop-shadow">
-              Choose a tool below to get started.
-            </p>
-          </div>
-
           {/* Recently Accessed */}
           {recentlyAccessed.length > 0 && (
             <div className="mb-8">
@@ -127,6 +118,15 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
               </div>
             </div>
           )}
+
+          <div className="mb-10">
+            <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
+              {getGreeting()}, how can I help?
+            </h2>
+            <p className="text-lg text-white/90 drop-shadow">
+              Choose a tool below to get started.
+            </p>
+          </div>
 
           {/* Tool Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -202,8 +202,8 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
         </div>
       </footer>
 
-      {/* Help Overlay */}
-      <HelpOverlay currentPage="home" />
+      {/* Search Overlay */}
+      <SearchOverlay currentPage="home" />
     </div>
   )
 }

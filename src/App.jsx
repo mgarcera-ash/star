@@ -4,7 +4,6 @@ import DispatchScripts from './components/DispatchScripts'
 import DAPHelper from './components/DAPHelper'
 import SpanishPhrases from './components/SpanishPhrases'
 import IntakeQuestionnaire from './components/IntakeQuestionnaire'
-import BottomNav from './components/BottomNav'
 
 function App() {
   const [currentView, setCurrentView] = useState('home')
@@ -57,7 +56,6 @@ function App() {
   return (
     <>
       {renderView()}
-      <BottomNav currentView={currentView} onNavigate={setCurrentView} />
     </>
   )
 }

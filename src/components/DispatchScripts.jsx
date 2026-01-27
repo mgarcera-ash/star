@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import HelpOverlay from './HelpOverlay'
+import SearchOverlay from './SearchOverlay'
 
 const DispatchScripts = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
@@ -81,33 +81,13 @@ const DispatchScripts = ({ onBack }) => {
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="text-white py-8 px-6">
-        <div className="max-w-7xl mx-auto flex items-center">
-          <button
-            onClick={onBack}
-            className="mr-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <div>
-            <h1 className="text-4xl font-bold drop-shadow-lg">
-              📋 Dispatch Scripts
-            </h1>
-            <p className="text-white/90 mt-2 text-lg drop-shadow">
-              Quick reference for common call scenarios
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold drop-shadow-lg">
+            📋 Dispatch Scripts
+          </h1>
+          <p className="text-white/90 mt-2 text-lg drop-shadow">
+            Quick reference for common call scenarios
+          </p>
         </div>
       </header>
 
@@ -162,34 +142,39 @@ const DispatchScripts = ({ onBack }) => {
           ) : (
             <>
               {/* Script Display */}
-              <div className="mb-8 flex items-center justify-between">
-                <div>
+              <div className="mb-8">
+                {/* Breadcrumbs */}
+                <div className="mb-4 flex items-center gap-2 text-white/80 text-sm drop-shadow">
+                  <button
+                    onClick={onBack}
+                    className="hover:text-white transition-colors"
+                  >
+                    Home
+                  </button>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                   <button
                     onClick={() => setSelectedScenario(null)}
-                    className="text-white hover:text-white/80 font-semibold mb-3 flex items-center drop-shadow"
+                    className="hover:text-white transition-colors"
                   >
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
-                    Back to scenarios
+                    Dispatch Scripts
                   </button>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  <span className="text-white font-semibold">{selectedScenario.title}</span>
+                </div>
+
+                {/* Title and Category */}
+                <div className="flex items-center justify-between">
                   <h2 className="text-3xl font-semibold text-white drop-shadow">
                     {selectedScenario.title}
                   </h2>
+                  <span className="px-5 py-2 bg-white/20 text-white text-sm rounded-full font-semibold backdrop-blur">
+                    {selectedScenario.category}
+                  </span>
                 </div>
-                <span className="px-5 py-2 bg-white/20 text-white text-sm rounded-full font-semibold backdrop-blur">
-                  {selectedScenario.category}
-                </span>
               </div>
 
               <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
@@ -223,8 +208,31 @@ const DispatchScripts = ({ onBack }) => {
         </div>
       </main>
 
-      {/* Help Overlay */}
-      <HelpOverlay currentPage="dispatch" />
+      {/* Floating Back Button */}
+      <button
+        onClick={selectedScenario ? () => setSelectedScenario(null) : onBack}
+        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-white text-ash-navy rounded-full
+                   shadow-2xl hover:scale-110 transition-transform duration-200 flex items-center
+                   justify-center font-bold group"
+        aria-label="Go back"
+      >
+        <svg
+          className="w-6 h-6 group-hover:-translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+
+      {/* Search Overlay */}
+      <SearchOverlay currentPage="dispatch" />
     </div>
   )
 }
