@@ -178,7 +178,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
                   </div>
                 }
               >
-                <Canvas camera={{ position: [80, 50, 80], fov: 50 }}>
+                <Canvas camera={{ position: [40, 25, 40], fov: 40 }}>
                   <ambientLight intensity={1.2} />
                   <directionalLight position={[30, 30, 20]} intensity={2} />
                   <directionalLight position={[-30, 20, -20]} intensity={1.2} />
