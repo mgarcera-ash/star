@@ -161,7 +161,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow py-6 px-6 pb-24 md:pb-8">
+      <main className="flex-grow px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -192,61 +192,35 @@ const VehicleSafetyCheck = ({ onBack }) => {
 
             {/* Right Column - Inspection Checkpoints */}
             <div className="space-y-4">
-              <div className="mb-4">
+              <div className="mb-3">
                 <h2 className="text-2xl font-bold text-white mb-1 drop-shadow">
                   Inspection Checkpoints
                 </h2>
-                <p className="text-sm text-white/90 drop-shadow">
-                  Click any checkpoint to view detailed inspection items.
-                </p>
               </div>
 
-              <div className="space-y-2 max-h-[730px] overflow-y-auto pr-2">
+              <div className="space-y-2 max-h-[800px] overflow-y-auto pr-2">
                 {checkpoints.map((checkpoint) => (
-                  <details
+                  <div
                     key={checkpoint.id}
-                    className="glass-card-strong rounded-xl shadow-lg overflow-hidden group"
+                    className="glass-card-strong rounded-xl shadow-lg overflow-hidden"
                   >
-                    <summary className="cursor-pointer p-3 hover:bg-white/50 transition-all list-none">
-                      <div className="flex items-center gap-3">
+                    <div className="p-3">
+                      <div className="flex items-center gap-3 mb-2">
                         <span className="text-3xl">{checkpoint.icon}</span>
-                        <div className="flex-1">
-                          <h3 className="text-base font-bold text-ash-navy group-open:text-ash-teal transition-colors">
-                            {checkpoint.title}
-                          </h3>
-                          <p className="text-xs text-gray-600">
-                            {checkpoint.items.length} items
-                          </p>
-                        </div>
-                        <svg
-                          className="w-5 h-5 text-ash-teal transition-transform group-open:rotate-180"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2.5}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
+                        <h3 className="text-base font-bold text-ash-navy">
+                          {checkpoint.title}
+                        </h3>
                       </div>
-                    </summary>
-
-                    <div className="px-3 pb-3 pt-1">
-                      <div className="bg-white/50 rounded-lg p-3">
-                        <ul className="grid grid-cols-1 gap-1.5">
-                          {checkpoint.items.map((item, index) => (
-                            <li key={index} className="flex items-start gap-2 text-xs">
-                              <span className="text-ash-teal mt-0.5 flex-shrink-0 text-sm">✓</span>
-                              <span className="text-gray-700">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <ul className="space-y-1 ml-12">
+                        {checkpoint.items.map((item, index) => (
+                          <li key={index} className="flex items-start gap-2 text-xs">
+                            <span className="text-ash-teal mt-0.5 flex-shrink-0 text-sm">✓</span>
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </details>
+                  </div>
                 ))}
               </div>
             </div>
