@@ -208,7 +208,9 @@ const DispatchScripts = ({ onBack }) => {
 
               <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
                 <p className="text-base text-gray-800 leading-relaxed">
-                  <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member <strong>you have power when in conversations</strong>, because <strong>you</strong> hold the information needed to get someone to safety. Adjust your language based on the caller's needs and situation. <strong>People who have been living in crisis may not have spare patience to give you, even if you give them all of yours</strong>. If someone meets you harshly, do <strong>not</strong> react in the same tone. If needed, forward the call to someone else.
+                  <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member you have <strong>power</strong> because you hold the information needed to get someone to safety. People who have been living in crisis may not have spare patience to give you, even if you give them all of yours.
+                  <br /><br />
+                  Most times your patience and kindness will break through. But other times, it might arouse anger, suspicion or paranoia. Adjust your language based on where people are at. If someone is harsh to you, do not react in the same tone. If needed, forward the call to a teammate.
                 </p>
               </div>
 
