@@ -1,15 +1,17 @@
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Environment } from '@react-three/drei'
+import { OrbitControls, useGLTF } from '@react-three/drei'
 import SearchOverlay from './SearchOverlay'
 
 // 3D Vehicle Model Component
 function VehicleModel() {
-  const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
-
-  return (
-    <primitive object={scene} scale={1.5} position={[0, -1, 0]} />
-  )
+  try {
+    const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
+    return <primitive object={scene} scale={1.5} position={[0, -1, 0]} />
+  } catch (error) {
+    console.error('Error loading 3D model:', error)
+    return null
+  }
 }
 
 // Main Component
@@ -39,22 +41,23 @@ const VehicleSafetyCheck = ({ onBack }) => {
 
             {/* 3D Viewer */}
             <div className="relative h-[600px] bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl overflow-hidden">
-              <Suspense fallback={
-                <div className="h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🔄</div>
-                    <div className="text-gray-700 text-xl font-semibold">Loading 3D model...</div>
-                    <div className="text-gray-600 text-sm mt-2">This may take a moment</div>
+              <Suspense
+                fallback={
+                  <div className="h-full flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">🔄</div>
+                      <div className="text-gray-700 text-xl font-semibold">Loading 3D model...</div>
+                      <div className="text-gray-600 text-sm mt-2">This may take a moment</div>
+                    </div>
                   </div>
-                </div>
-              }>
+                }
+              >
                 <Canvas
                   camera={{ position: [5, 2, 5], fov: 50 }}
-                  shadows
                 >
-                  <ambientLight intensity={0.7} />
-                  <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={1} castShadow />
-                  <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                  <ambientLight intensity={0.8} />
+                  <directionalLight position={[10, 10, 5]} intensity={1} />
+                  <directionalLight position={[-10, -10, -5]} intensity={0.5} />
 
                   <VehicleModel />
 
@@ -65,8 +68,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
                     maxDistance={15}
                     maxPolarAngle={Math.PI / 2}
                   />
-
-                  <Environment preset="city" />
                 </Canvas>
               </Suspense>
 
