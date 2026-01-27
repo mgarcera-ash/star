@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import SearchOverlay from './SearchOverlay'
+import ScriptBuilder from './ScriptBuilder'
 import { FaPersonShelter, FaVanShuttle } from 'react-icons/fa6'
 import { TbOld } from 'react-icons/tb'
 import { GrEmergency } from 'react-icons/gr'
+import { FaWandMagicSparkles } from 'react-icons/fa6'
 
 const DispatchScripts = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
+  const [showScriptBuilder, setShowScriptBuilder] = useState(false)
 
   const scenarios = [
     {
@@ -98,7 +101,7 @@ const DispatchScripts = ({ onBack }) => {
       {/* Main Content */}
       <main className="flex-grow py-8 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
-          {!selectedScenario ? (
+          {!selectedScenario && !showScriptBuilder ? (
             <>
               {/* Scenario Selection */}
               <div className="mb-8">
@@ -110,7 +113,7 @@ const DispatchScripts = ({ onBack }) => {
                 </p>
               </div>
 
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-3 flex-wrap mb-6">
                 {scenarios.map((scenario) => (
                   <button
                     key={scenario.id}
@@ -125,6 +128,31 @@ const DispatchScripts = ({ onBack }) => {
                   </button>
                 ))}
               </div>
+
+              {/* Script Builder Button */}
+              <div className="mb-8">
+                <div className="h-px bg-white/20 mb-8"></div>
+                <h3 className="text-2xl font-semibold text-white mb-3 drop-shadow">
+                  Or build your script dynamically
+                </h3>
+                <button
+                  onClick={() => setShowScriptBuilder(true)}
+                  className="glass-card-strong px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl
+                           transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                >
+                  <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                    <FaWandMagicSparkles className="w-full h-full" />
+                  </span>
+                  <div className="text-left">
+                    <div className="font-bold text-ash-navy text-lg">Script Builder</div>
+                    <div className="text-sm text-gray-600">Build your script step-by-step as the call progresses</div>
+                  </div>
+                </button>
+              </div>
+            </>
+          ) : showScriptBuilder ? (
+            <>
+              <ScriptBuilder onBack={() => setShowScriptBuilder(false)} />
             </>
           ) : (
             <>
@@ -197,7 +225,15 @@ const DispatchScripts = ({ onBack }) => {
 
       {/* Floating Back Button */}
       <button
-        onClick={selectedScenario ? () => setSelectedScenario(null) : onBack}
+        onClick={() => {
+          if (selectedScenario) {
+            setSelectedScenario(null)
+          } else if (showScriptBuilder) {
+            setShowScriptBuilder(false)
+          } else {
+            onBack()
+          }
+        }}
         className="fixed bottom-6 left-6 z-50 px-6 py-3 bg-ash-navy text-white rounded-full
                    shadow-2xl hover:scale-110 transition-all duration-200 flex items-center
                    gap-2 font-semibold group"
