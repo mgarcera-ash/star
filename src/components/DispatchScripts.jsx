@@ -17,8 +17,8 @@ const DispatchScripts = ({ onBack }) => {
       category: 'Shelter',
       icon: <FaPersonShelter className="w-full h-full" />,
       script: [
-        "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
-        "[Listen to request]",
+        "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
+        "[Listen]",
         "I understand you're requesting shelter placement. Let me gather some information to help you.",
         "Can you tell me your name and date of birth?",
         "Are you currently in a safe location?",
@@ -36,8 +36,8 @@ const DispatchScripts = ({ onBack }) => {
       category: 'Transport',
       icon: <FaVanShuttle className="w-full h-full" />,
       script: [
-        "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
-        "[Listen to request]",
+        "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
+        "[Listen]",
         "I can help arrange transportation. Where are you currently located?",
         "And where do you need to go?",
         "Is this for immediate transport or scheduled for later?",
@@ -53,8 +53,8 @@ const DispatchScripts = ({ onBack }) => {
       category: 'Well-Being',
       icon: <TbOld className="w-full h-full" />,
       script: [
-        "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
-        "[Listen to concern]",
+        "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
+        "[Listen]",
         "I understand you're concerned about [person's name]. Can you tell me their address?",
         "And what is your relationship to this person?",
         "When was the last time you had contact with them?",
@@ -71,8 +71,8 @@ const DispatchScripts = ({ onBack }) => {
       category: 'Crisis',
       icon: <GrEmergency className="w-full h-full" />,
       script: [
-        "Thank you for calling STAR. This is [Your Name]. I'm here to help.",
-        "[Use calm, measured tone]",
+        "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
+        "[Listen]",
         "I can hear that you're going through something difficult right now. I want to help.",
         "Can you tell me what's happening?",
         "[Active listening - repeat back what you hear]",
@@ -92,8 +92,8 @@ const DispatchScripts = ({ onBack }) => {
       {/* Header */}
       <header className="text-white py-8 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl font-staatliches drop-shadow-lg tracking-wide">
-            DISPATCH SCRIPTS
+          <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
+            Dispatch Scripts
           </h1>
         </div>
       </header>

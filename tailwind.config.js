@@ -15,6 +15,7 @@ export default {
         'sans': ['Inter Tight', 'system-ui', 'sans-serif'],
         'display': ['Inter Tight', 'system-ui', 'sans-serif'],
         'staatliches': ['Staatliches', 'system-ui', 'sans-serif'],
+        'impact': ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'],
       },
     },
   },

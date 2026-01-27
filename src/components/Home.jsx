@@ -157,7 +157,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                   <div className="text-6xl mb-5 drop-shadow w-16 h-16 flex items-center justify-center text-ash-teal">
                     {tool.icon}
                   </div>
-                  <h3 className="text-3xl font-staatliches text-ash-navy mb-3 tracking-wide uppercase">
+                  <h3 className="text-3xl text-ash-navy mb-3 font-bold">
                     {tool.title}
                   </h3>
                   <p className="text-gray-700 mb-4 text-base leading-relaxed">
