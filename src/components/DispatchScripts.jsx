@@ -206,6 +206,12 @@ const DispatchScripts = ({ onBack }) => {
                 </div>
               </div>
 
+              <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
+                <p className="text-base text-gray-800 leading-relaxed">
+                  <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member <strong>you have power when in conversations</strong>, because <strong>you</strong> hold the information needed to get someone to safety. Adjust your language based on the caller's needs and situation. <strong>People who have been living in crisis may not have spare patience to give you, even if you give them all of yours</strong>. If someone meets you harshly, do <strong>not</strong> react in the same tone. If needed, forward the call to someone else.
+                </p>
+              </div>
+
               <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
                 <ol className="space-y-5">
                   {selectedScenario.script.map((step, index) => (
@@ -224,12 +230,6 @@ const DispatchScripts = ({ onBack }) => {
                     </li>
                   ))}
                 </ol>
-              </div>
-
-              <div className="mt-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-lg">
-                <p className="text-base text-gray-800 leading-relaxed">
-                  <strong className="text-ash-teal">Tip:</strong> Active listening and empathy are crucial. Remember: As A Safe Haven team member you power when you're in conversation, because you hold the information needed to get someone to safety. Adjust your language based on the caller's needs and situation. People who have been living in crisis may not have spare patience to give you, even if you give them all the patience you have. If someone meets you harshly, do not react in the same tone. If needed, forward the call to someone else.
-                </p>
               </div>
 </>
           )}
