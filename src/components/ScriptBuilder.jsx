@@ -193,12 +193,6 @@ const ScriptBuilder = ({ onBack }) => {
           </button>
         </div>
       )}
-
-      <div className="mt-6 glass-card border-l-4 border-ash-teal p-6 rounded-lg bg-white/50">
-        <p className="text-base text-gray-800 leading-relaxed">
-          <strong className="text-ash-teal">Tip:</strong> Start with the greeting, listen to what the caller needs, then click the + button to select the appropriate script path.
-        </p>
-      </div>
     </div>
   )
 }
