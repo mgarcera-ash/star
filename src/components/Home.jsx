@@ -1,4 +1,43 @@
-const Home = ({ onNavigate }) => {
+import { useEffect } from 'react'
+import HelpOverlay from './HelpOverlay'
+
+const Home = ({ onNavigate, recentlyAccessed = [] }) => {
+  // Get time-aware greeting
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return 'Good morning'
+    if (hour < 18) return 'Good afternoon'
+    return 'Good evening'
+  }
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      // Only trigger if not typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+
+      switch(e.key) {
+        case '1':
+          onNavigate('dispatch')
+          break
+        case '2':
+          onNavigate('dap')
+          break
+        case '3':
+          onNavigate('spanish')
+          break
+        case '4':
+          onNavigate('intake')
+          break
+        default:
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [onNavigate])
+
   const tools = [
     {
       id: 'dispatch',
@@ -39,6 +78,7 @@ const Home = ({ onNavigate }) => {
       {/* Header */}
       <header className="text-white py-12 px-6">
         <div className="max-w-7xl mx-auto">
+          <p className="text-lg text-white/70 mb-2 drop-shadow">{getGreeting()}! 👋</p>
           <h1 className="text-5xl md:text-6xl font-bold mb-3 drop-shadow-lg">
             STAR Tools
           </h1>
@@ -52,16 +92,45 @@ const Home = ({ onNavigate }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow py-8 px-6">
+      <main className="flex-grow py-8 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-10">
             <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-              Quick Access Tools
+              What do you need help with?
             </h2>
             <p className="text-lg text-white/90 drop-shadow">
-              Select a tool to get started
+              Choose a tool below to get started
             </p>
           </div>
+
+          {/* Recently Accessed */}
+          {recentlyAccessed.length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-white/90 mb-4 drop-shadow flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Recently Accessed
+              </h3>
+              <div className="flex gap-3 flex-wrap">
+                {recentlyAccessed.map((toolId) => {
+                  const tool = tools.find(t => t.id === toolId)
+                  if (!tool || !tool.ready) return null
+                  return (
+                    <button
+                      key={toolId}
+                      onClick={() => onNavigate(toolId)}
+                      className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
+                               transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                    >
+                      <span className="text-2xl">{tool.icon}</span>
+                      <span className="font-semibold text-ash-navy">{tool.title}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Tool Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -134,6 +203,9 @@ const Home = ({ onNavigate }) => {
           <p>Built for A Safe Haven STAR Program Staff</p>
         </div>
       </footer>
+
+      {/* Help Overlay */}
+      <HelpOverlay currentPage="home" />
     </div>
   )
 }

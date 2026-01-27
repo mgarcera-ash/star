@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import HelpOverlay from './HelpOverlay'
 
 const DispatchScripts = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
@@ -111,7 +112,7 @@ const DispatchScripts = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow py-8 px-6">
+      <main className="flex-grow py-8 px-6 pb-24 md:pb-8">
         <div className="max-w-7xl mx-auto">
           {!selectedScenario ? (
             <>
@@ -221,6 +222,9 @@ const DispatchScripts = ({ onBack }) => {
           )}
         </div>
       </main>
+
+      {/* Help Overlay */}
+      <HelpOverlay currentPage="dispatch" />
     </div>
   )
 }
