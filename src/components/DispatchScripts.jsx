@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import SearchOverlay from './SearchOverlay'
+import { FaPersonShelter, FaShuttleVan } from 'react-icons/fa6'
+import { TbOld } from 'react-icons/tb'
+import { GrEmergency } from 'react-icons/gr'
 
 const DispatchScripts = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
@@ -9,6 +12,7 @@ const DispatchScripts = ({ onBack }) => {
       id: 'shelter-placement',
       title: 'Shelter Placement Request',
       category: 'Shelter',
+      icon: <FaPersonShelter className="w-full h-full" />,
       script: [
         "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
         "[Listen to request]",
@@ -27,6 +31,7 @@ const DispatchScripts = ({ onBack }) => {
       id: 'transport-request',
       title: 'Transportation Request',
       category: 'Transport',
+      icon: <FaShuttleVan className="w-full h-full" />,
       script: [
         "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
         "[Listen to request]",
@@ -43,6 +48,7 @@ const DispatchScripts = ({ onBack }) => {
       id: 'well-being-check',
       title: 'Senior Well-Being Check',
       category: 'Well-Being',
+      icon: <TbOld className="w-full h-full" />,
       script: [
         "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
         "[Listen to concern]",
@@ -60,6 +66,7 @@ const DispatchScripts = ({ onBack }) => {
       id: 'crisis-deescalation',
       title: 'Crisis De-escalation',
       category: 'Crisis',
+      icon: <GrEmergency className="w-full h-full" />,
       script: [
         "Thank you for calling STAR. This is [Your Name]. I'm here to help.",
         "[Use calm, measured tone]",
@@ -103,35 +110,18 @@ const DispatchScripts = ({ onBack }) => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex gap-3 flex-wrap">
                 {scenarios.map((scenario) => (
                   <button
                     key={scenario.id}
                     onClick={() => setSelectedScenario(scenario)}
-                    className="group glass-card-strong rounded-2xl p-8 text-left shadow-xl
-                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                    className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
+                             transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-2xl font-bold text-ash-navy group-hover:text-ash-teal transition-colors">
-                        {scenario.title}
-                      </h3>
-                      <svg
-                        className="w-6 h-6 text-ash-teal opacity-0 group-hover:opacity-100 transition-opacity"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className="inline-block px-4 py-2 bg-ash-teal/10 text-ash-teal text-sm rounded-full font-semibold">
-                      {scenario.category}
+                    <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                      {scenario.icon}
                     </span>
+                    <span className="font-semibold text-ash-navy">{scenario.title}</span>
                   </button>
                 ))}
               </div>
