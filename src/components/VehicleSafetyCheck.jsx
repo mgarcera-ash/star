@@ -149,7 +149,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="text-white py-6 px-6">
+      <header className="text-white pt-6 pb-2 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
             Vehicle Safety Check
@@ -161,7 +161,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow px-6 pb-24 md:pb-8">
+      <main className="flex-grow px-6 pb-24 md:pb-8 -mt-2">
         <div className="max-w-7xl mx-auto">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
