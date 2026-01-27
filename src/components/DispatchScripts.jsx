@@ -79,31 +79,31 @@ const DispatchScripts = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="gradient-ash text-white py-6 px-6 shadow-lg">
+      <header className="text-white py-8 px-6">
         <div className="max-w-7xl mx-auto flex items-center">
           <button
             onClick={onBack}
             className="mr-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
           >
-            <svg 
-              className="w-6 h-6" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
                 d="M15 19l-7-7 7-7"
               />
             </svg>
           </button>
           <div>
-            <h1 className="text-3xl font-display font-bold">
+            <h1 className="text-4xl font-bold drop-shadow-lg">
               📋 Dispatch Scripts
             </h1>
-            <p className="text-white/90 mt-1">
+            <p className="text-white/90 mt-2 text-lg drop-shadow">
               Quick reference for common call scenarios
             </p>
           </div>
@@ -116,43 +116,42 @@ const DispatchScripts = ({ onBack }) => {
           {!selectedScenario ? (
             <>
               {/* Scenario Selection */}
-              <div className="mb-6">
-                <h2 className="text-2xl font-display font-semibold text-ash-navy mb-2">
+              <div className="mb-8">
+                <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
                   Select a Scenario
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-lg text-white/90 drop-shadow">
                   Choose the type of call you're handling
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {scenarios.map((scenario) => (
                   <button
                     key={scenario.id}
                     onClick={() => setSelectedScenario(scenario)}
-                    className="group bg-white rounded-xl p-6 text-left shadow-md hover:shadow-xl 
-                             transform transition-all duration-200 hover:scale-105 border-2 border-transparent
-                             hover:border-ash-teal"
+                    className="group glass-card-strong rounded-2xl p-8 text-left shadow-xl
+                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-xl font-display font-bold text-ash-navy group-hover:text-ash-teal transition-colors">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-2xl font-bold text-ash-navy group-hover:text-ash-teal transition-colors">
                         {scenario.title}
                       </h3>
-                      <svg 
-                        className="w-6 h-6 text-ash-teal opacity-0 group-hover:opacity-100 transition-opacity" 
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        className="w-6 h-6 text-ash-teal opacity-0 group-hover:opacity-100 transition-opacity"
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
                           d="M9 5l7 7-7 7"
                         />
                       </svg>
                     </div>
-                    <span className="inline-block px-3 py-1 bg-ash-teal/10 text-ash-teal text-sm rounded-full font-medium">
+                    <span className="inline-block px-4 py-2 bg-ash-teal/10 text-ash-teal text-sm rounded-full font-semibold">
                       {scenario.category}
                     </span>
                   </button>
@@ -162,47 +161,47 @@ const DispatchScripts = ({ onBack }) => {
           ) : (
             <>
               {/* Script Display */}
-              <div className="mb-6 flex items-center justify-between">
+              <div className="mb-8 flex items-center justify-between">
                 <div>
                   <button
                     onClick={() => setSelectedScenario(null)}
-                    className="text-ash-teal hover:text-ash-accent font-semibold mb-2 flex items-center"
+                    className="text-white hover:text-white/80 font-semibold mb-3 flex items-center drop-shadow"
                   >
-                    <svg 
-                      className="w-5 h-5 mr-1" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
                         d="M15 19l-7-7 7-7"
                       />
                     </svg>
                     Back to scenarios
                   </button>
-                  <h2 className="text-2xl font-display font-semibold text-ash-navy">
+                  <h2 className="text-3xl font-semibold text-white drop-shadow">
                     {selectedScenario.title}
                   </h2>
                 </div>
-                <span className="px-4 py-2 bg-ash-teal/10 text-ash-teal text-sm rounded-full font-medium">
+                <span className="px-5 py-2 bg-white/20 text-white text-sm rounded-full font-semibold backdrop-blur">
                   {selectedScenario.category}
                 </span>
               </div>
 
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <ol className="space-y-4">
+              <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
+                <ol className="space-y-5">
                   {selectedScenario.script.map((step, index) => (
                     <li key={index} className="flex">
-                      <span className="flex-shrink-0 w-8 h-8 bg-ash-teal text-white rounded-full 
-                                     flex items-center justify-center font-bold text-sm mr-4 mt-1">
+                      <span className="flex-shrink-0 w-10 h-10 bg-ash-teal text-white rounded-full
+                                     flex items-center justify-center font-bold text-base mr-5 mt-1 shadow-md">
                         {index + 1}
                       </span>
-                      <p className="flex-grow text-gray-700 text-lg leading-relaxed pt-1">
+                      <p className="flex-grow text-gray-800 text-lg leading-relaxed pt-2">
                         {step.startsWith('[') ? (
-                          <span className="italic text-ash-accent font-medium">{step}</span>
+                          <span className="italic text-ash-accent font-semibold">{step}</span>
                         ) : (
                           step
                         )}
@@ -212,13 +211,13 @@ const DispatchScripts = ({ onBack }) => {
                 </ol>
               </div>
 
-              <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                <p className="text-sm text-blue-800">
-                  <strong>Tip:</strong> These scripts are guides. Adjust your language based on the 
+              <div className="mt-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-lg">
+                <p className="text-base text-gray-800 leading-relaxed">
+                  <strong className="text-ash-teal">Tip:</strong> These scripts are guides. Adjust your language based on the
                   caller's needs and the specific situation. Always prioritize active listening and empathy.
                 </p>
               </div>
-            </>
+</>
           )}
         </div>
       </main>
