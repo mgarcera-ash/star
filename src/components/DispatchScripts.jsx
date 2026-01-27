@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import SearchOverlay from './SearchOverlay'
-import { FaPersonShelter, FaShuttleVan } from 'react-icons/fa6'
+import { FaPersonShelter, FaVanShuttle } from 'react-icons/fa6'
 import { TbOld } from 'react-icons/tb'
 import { GrEmergency } from 'react-icons/gr'
 
@@ -31,7 +31,7 @@ const DispatchScripts = ({ onBack }) => {
       id: 'transport-request',
       title: 'Transportation Request',
       category: 'Transport',
-      icon: <FaShuttleVan className="w-full h-full" />,
+      icon: <FaVanShuttle className="w-full h-full" />,
       script: [
         "Thank you for calling STAR. This is [Your Name]. How can I help you today?",
         "[Listen to request]",
