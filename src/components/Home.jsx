@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { BsTelephoneInboundFill, BsChatSquareDots } from 'react-icons/bs'
 import HelpOverlay from './HelpOverlay'
 
 const Home = ({ onNavigate, recentlyAccessed = [] }) => {
@@ -43,7 +44,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       id: 'dispatch',
       title: 'Dispatch Scripts',
       description: 'Quick reference scripts for common scenarios',
-      icon: '📋',
+      icon: <BsTelephoneInboundFill className="w-full h-full" />,
       gradient: 'from-ash-teal to-ash-accent',
       ready: true
     },
@@ -59,7 +60,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       id: 'spanish',
       title: 'Spanish Phrases',
       description: 'Common phrases for client communication',
-      icon: '🗣️',
+      icon: <BsChatSquareDots className="w-full h-full" />,
       gradient: 'from-ash-teal to-emerald-500',
       ready: false
     },
@@ -76,13 +77,12 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="text-white py-12 px-6">
+      <header className="text-white py-8 px-6">
         <div className="max-w-7xl mx-auto">
-          <p className="text-lg text-white/70 mb-4 drop-shadow">{getGreeting()}! 👋</p>
           <img
             src={`${import.meta.env.BASE_URL}star-logo.png?v=2`}
             alt="STAR Tools - Shelter, Transport, and Response - Staff Resources by A Safe Haven"
-            className="h-32 md:h-40 w-auto drop-shadow-2xl"
+            className="h-20 md:h-24 w-auto drop-shadow-2xl"
           />
         </div>
       </header>
@@ -92,10 +92,10 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-10">
             <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-              What do you need help with?
+              {getGreeting()}, how can I help?
             </h2>
             <p className="text-lg text-white/90 drop-shadow">
-              Choose a tool below to get started
+              Choose a tool below to get started.
             </p>
           </div>
 
@@ -119,7 +119,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                       className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
                                transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
                     >
-                      <span className="text-2xl">{tool.icon}</span>
+                      <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">{tool.icon}</span>
                       <span className="font-semibold text-ash-navy">{tool.title}</span>
                     </button>
                   )
@@ -154,7 +154,9 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="text-6xl mb-5 drop-shadow">{tool.icon}</div>
+                  <div className="text-6xl mb-5 drop-shadow w-16 h-16 flex items-center justify-center text-ash-teal">
+                    {tool.icon}
+                  </div>
                   <h3 className="text-2xl font-bold text-ash-navy mb-3">
                     {tool.title}
                   </h3>
