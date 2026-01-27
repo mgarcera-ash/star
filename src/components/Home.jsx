@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BsTelephoneInboundFill, BsChatSquareDots } from 'react-icons/bs'
 import { FaNotesMedical } from 'react-icons/fa'
+import { FaVanShuttle } from 'react-icons/fa6'
 import SearchOverlay from './SearchOverlay'
 
 const Home = ({ onNavigate, recentlyAccessed = [] }) => {
@@ -26,9 +27,12 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
           onNavigate('dap')
           break
         case '3':
-          onNavigate('spanish')
+          onNavigate('vehicle')
           break
         case '4':
+          onNavigate('spanish')
+          break
+        case '5':
           onNavigate('intake')
           break
         default:
@@ -55,6 +59,14 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       description: 'Generate properly formatted DAP notes',
       icon: <FaNotesMedical className="w-full h-full" />,
       gradient: 'from-ash-accent to-ash-navy',
+      ready: true
+    },
+    {
+      id: 'vehicle',
+      title: 'Vehicle Safety Check',
+      description: '3D interactive pre-trip and post-trip inspection',
+      icon: <FaVanShuttle className="w-full h-full" />,
+      gradient: 'from-blue-500 to-ash-navy',
       ready: true
     },
     {
