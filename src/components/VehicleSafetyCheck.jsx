@@ -171,9 +171,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
             Vehicle Safety Check
           </h1>
-          <p className="text-white/90 text-lg mt-2 drop-shadow">
-            Interactive 3D inspection reference
-          </p>
         </div>
       </header>
 
@@ -186,8 +183,8 @@ const VehicleSafetyCheck = ({ onBack }) => {
             <div className="relative h-[800px] -mt-6">
               <Suspense
                 fallback={
-                  <div className="h-full flex items-center justify-center glass-card-strong rounded-xl">
-                    <div className="text-center p-8">
+                  <div className="h-full w-full flex items-center justify-center">
+                    <div className="glass-card-strong rounded-xl p-8 text-center">
                       <div className="text-7xl mb-4 animate-spin">🔄</div>
                       <div className="text-ash-navy text-2xl font-bold mb-2">Loading 3D Model</div>
                       <div className="text-gray-600 text-base">Please wait while the vehicle loads...</div>
@@ -209,81 +206,80 @@ const VehicleSafetyCheck = ({ onBack }) => {
 
             {/* Right Column - Inspection Checkpoints Carousel */}
             <div className="flex flex-col h-[800px]">
-              <div className="mb-4">
-                <h2 className="text-3xl font-bold text-white mb-2 drop-shadow">
-                  Inspection Checkpoints
-                </h2>
-                <p className="text-base text-white/90 drop-shadow">
-                  {currentCheckpointIndex + 1} of {checkpoints.length}
-                </p>
-              </div>
-
               {/* Carousel Card */}
-              <div className="flex-1 flex flex-col">
-                <div className="glass-card-strong rounded-2xl shadow-2xl p-8 flex-1 flex flex-col">
-                  <div className="flex items-center gap-5 mb-6">
-                    <div className="w-16 h-16 text-ash-teal flex-shrink-0">
-                      {currentCheckpoint.icon}
-                    </div>
-                    <h3 className="text-3xl font-bold text-ash-navy">
-                      {currentCheckpoint.title}
-                    </h3>
-                  </div>
-
-                  <div className="flex-1 overflow-y-auto">
-                    <div className="bg-white/50 rounded-xl p-6">
-                      <h4 className="font-bold text-ash-navy mb-4 text-lg">What to check:</h4>
-                      <ul className="space-y-3">
-                        {currentCheckpoint.items.map((item, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <span className="text-ash-teal mt-1 flex-shrink-0 text-2xl font-bold">✓</span>
-                            <span className="text-gray-700 text-base leading-relaxed">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Navigation Buttons */}
-                  <div className="flex items-center justify-between mt-6">
-                    <button
-                      onClick={handlePrevious}
-                      className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
-                      aria-label="Previous checkpoint"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                      </svg>
-                      Previous
-                    </button>
-
-                    <button
-                      onClick={handleNext}
-                      className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
-                      aria-label="Next checkpoint"
-                    >
-                      Next
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
+              <div className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8">
+                {/* Header */}
+                <div className="mb-6">
+                  <h2 className="text-3xl font-bold text-ash-navy mb-2">
+                    Inspection Checkpoints
+                  </h2>
+                  <p className="text-base text-gray-600">
+                    {currentCheckpointIndex + 1} of {checkpoints.length}
+                  </p>
                 </div>
 
-                {/* Pagination Dots */}
-                <div className="flex justify-center gap-2 mt-4">
-                  {checkpoints.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentCheckpointIndex(index)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        index === currentCheckpointIndex
-                          ? 'bg-ash-teal w-8'
-                          : 'bg-white/40 hover:bg-white/60'
-                      }`}
-                      aria-label={`Go to checkpoint ${index + 1}`}
-                    />
-                  ))}
+                {/* Checkpoint Icon and Title */}
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-16 h-16 text-ash-teal flex-shrink-0">
+                    {currentCheckpoint.icon}
+                  </div>
+                  <h3 className="text-3xl font-bold text-ash-navy">
+                    {currentCheckpoint.title}
+                  </h3>
+                </div>
+
+                {/* Checklist Items */}
+                <div className="flex-1 overflow-y-auto mb-6">
+                  <h4 className="font-bold text-ash-navy mb-4 text-lg">What to check:</h4>
+                  <ul className="space-y-3">
+                    {currentCheckpoint.items.map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="text-ash-teal mt-1 flex-shrink-0 text-2xl font-bold">✓</span>
+                        <span className="text-gray-700 text-base leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Navigation with Pagination */}
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={handlePrevious}
+                    className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
+                    aria-label="Previous checkpoint"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                  </button>
+
+                  {/* Pagination Dots */}
+                  <div className="flex justify-center gap-2">
+                    {checkpoints.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentCheckpointIndex(index)}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${
+                          index === currentCheckpointIndex
+                            ? 'bg-ash-teal w-8'
+                            : 'bg-gray-400 hover:bg-gray-500'
+                        }`}
+                        aria-label={`Go to checkpoint ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={handleNext}
+                    className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
+                    aria-label="Next checkpoint"
+                  >
+                    Next
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
