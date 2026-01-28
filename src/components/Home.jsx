@@ -177,19 +177,19 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                 )}
 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className={`text-4xl mb-3 drop-shadow w-10 h-10 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
+                <div className="relative z-10 flex flex-col h-full justify-center">
+                  <div className={`text-6xl mb-4 drop-shadow w-16 h-16 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
                     {tool.icon}
                   </div>
-                  <h3 className="text-lg text-ash-navy mb-2 font-bold leading-tight">
+                  <h3 className="text-2xl text-ash-navy mb-3 font-bold leading-tight">
                     {tool.title}
                   </h3>
-                  <p className="text-gray-700 text-sm leading-snug flex-grow">
+                  <p className="text-gray-700 text-base leading-relaxed">
                     {tool.description}
                   </p>
 
                   {!tool.ready && (
-                    <span className="inline-block mt-2 px-2 py-1 bg-white/50 text-gray-600 text-xs font-medium rounded-full border border-white/30">
+                    <span className="inline-block mt-3 px-3 py-1 bg-white/50 text-gray-600 text-sm font-medium rounded-full border border-white/30">
                       Coming Soon
                     </span>
                   )}
