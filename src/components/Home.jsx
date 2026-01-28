@@ -48,7 +48,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
     {
       id: 'dispatch',
       title: 'Dispatch Scripts',
-      description: 'Quick reference scripts for common scenarios',
+      description: 'I\'m here to help during your calls.',
       icon: <BsTelephoneInboundFill className="w-full h-full" />,
       iconColor: 'text-yellow-500',
       gradient: 'from-ash-teal to-ash-accent',
@@ -64,8 +64,8 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
     },
     {
       id: 'vehicle',
-      title: 'Vehicle Safety Info',
-      description: '3D interactive pre-trip and post-trip inspection',
+      title: 'Van Inspection',
+      description: 'Let\'s make sure your van is ready to go.',
       icon: <FaVanShuttle className="w-full h-full" />,
       iconColor: 'text-blue-500',
       gradient: 'from-blue-500 to-ash-navy',
@@ -73,8 +73,8 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
     },
     {
       id: 'bedreporting',
-      title: 'Bed Reporting Tracker',
-      description: 'Live cycle status and countdown timers',
+      title: 'Bed Reporting Clock',
+      description: 'I\'m keeping track of time for bed reports.',
       icon: <FaBed className="w-full h-full" />,
       iconColor: 'text-purple-500',
       gradient: 'from-purple-500 to-pink-500',

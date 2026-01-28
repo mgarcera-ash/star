@@ -193,7 +193,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       <header className="text-white pt-8 pb-4 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
-            Vehicle Safety Info
+            Van Inspection
           </h1>
         </div>
       </header>
