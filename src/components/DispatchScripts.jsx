@@ -109,8 +109,8 @@ const DispatchScripts = ({ onBack }) => {
             <>
               {/* Script Builder Button */}
               <div className="mb-8">
-                <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-                  Build your script dynamically (recommended)
+                <h2 className="text-2xl font-semibold text-white mb-3 drop-shadow">
+                  Build as you go (Recommended)
                 </h2>
                 <button
                   onClick={() => setShowScriptBuilder(true)}
@@ -130,12 +130,9 @@ const DispatchScripts = ({ onBack }) => {
               {/* Scenario Selection */}
               <div className="mb-8">
                 <div className="h-px bg-white/20 mb-8"></div>
-                <h3 className="text-2xl font-semibold text-white mb-3 drop-shadow">
-                  Or select a scenario
-                </h3>
-                <p className="text-lg text-white/90 drop-shadow mb-4">
-                  Choose the type of call you're handling.
-                </p>
+                <h2 className="text-2xl font-semibold text-white mb-4 drop-shadow">
+                  Or select a scenario below.
+                </h2>
               </div>
 
               <div className="flex gap-3 flex-wrap mb-6">
