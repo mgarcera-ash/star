@@ -18,6 +18,7 @@ const BedReportingTracker = ({ onBack }) => {
     {
       name: 'Overnight',
       icon: <FaMoon className="w-full h-full" />,
+      iconColor: 'text-yellow-400',
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       reporting: { start: 0, end: 1.5, label: '12:00 AM - 1:30 AM' },
       followup: { start: 1.5, end: 2.25, label: '1:30 AM - 2:15 AM' },
@@ -26,7 +27,8 @@ const BedReportingTracker = ({ onBack }) => {
     {
       name: 'Morning',
       icon: <MdSunny className="w-full h-full" />,
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      iconColor: 'text-orange-500',
+      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
       reporting: { start: 8, end: 9.5, label: '8:00 AM - 9:30 AM' },
       followup: { start: 9.5, end: 10.25, label: '9:30 AM - 10:15 AM' },
       update: { time: 10.5, label: '~10:30 AM' }
@@ -34,7 +36,8 @@ const BedReportingTracker = ({ onBack }) => {
     {
       name: 'Evening',
       icon: <FiSunset className="w-full h-full" />,
-      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      iconColor: 'text-purple-500',
+      gradient: 'linear-gradient(135deg, #ff9a56 0%, #ff6a00 100%)',
       reporting: { start: 16, end: 17.5, label: '4:00 PM - 5:30 PM' },
       followup: { start: 17.5, end: 18.25, label: '5:30 PM - 6:15 PM' },
       update: { time: 18.5, label: '~6:30 PM' }
@@ -151,7 +154,7 @@ const BedReportingTracker = ({ onBack }) => {
                     className="h-20 -mx-6 -mt-6 mb-5 rounded-t-2xl flex items-center justify-center relative overflow-hidden"
                     style={{ background: cycle.gradient }}
                   >
-                    <div className="text-5xl w-12 h-12 text-white flex items-center justify-center">{cycle.icon}</div>
+                    <div className={`text-5xl w-12 h-12 flex items-center justify-center ${cycle.iconColor || 'text-white'}`}>{cycle.icon}</div>
                     {isActive && (
                       <div className="absolute top-2 right-2 bg-white/90 text-red-600 px-3 py-1 rounded-full text-xs font-bold">
                         LIVE
@@ -255,7 +258,7 @@ const BedReportingTracker = ({ onBack }) => {
                   const status = getCycleStatus(cycle)
                   return (
                     <div key={i} className="flex items-center gap-2">
-                      <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">{cycle.icon}</span>
+                      <span className={`text-2xl w-8 h-8 flex items-center justify-center ${cycle.iconColor || 'text-ash-teal'}`}>{cycle.icon}</span>
                       <span className="font-bold text-ash-navy">{cycle.name}:</span>
                       <span className={`font-semibold ${
                         status.phase === 'complete' ? 'text-green-600' :
