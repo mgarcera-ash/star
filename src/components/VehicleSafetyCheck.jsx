@@ -1,5 +1,5 @@
 import { Suspense, useRef, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import SearchOverlay from './SearchOverlay'
 import { GiCarWheel, GiGearStick, GiMirrorMirror, GiCarSeat } from 'react-icons/gi'
@@ -7,21 +7,6 @@ import { PiHeadlights } from 'react-icons/pi'
 import { FaCarSide, FaOilCan } from 'react-icons/fa'
 import { MdHealthAndSafety } from 'react-icons/md'
 import { TiDocumentText } from 'react-icons/ti'
-import * as THREE from 'three'
-
-// Camera Controller Component
-function CameraController({ targetPosition }) {
-  const { camera } = useThree()
-
-  useFrame(() => {
-    if (targetPosition) {
-      camera.position.lerp(new THREE.Vector3(...targetPosition), 0.05)
-      camera.lookAt(0, 0, 0)
-    }
-  })
-
-  return null
-}
 
 // 3D Vehicle Model Component with auto-rotation
 function VehicleModel() {
@@ -52,13 +37,12 @@ function VehicleModel() {
 const VehicleSafetyCheck = ({ onBack }) => {
   const [currentCheckpointIndex, setCurrentCheckpointIndex] = useState(0)
 
-  // Inspection checkpoints with camera positions
+  // Inspection checkpoints
   const checkpoints = [
     {
       id: 'tires',
       title: 'Tires & Wheels',
       icon: <GiCarWheel className="w-full h-full" />,
-      cameraPosition: [35, 10, 35],
       items: [
         'Tire inflation adequate (all 4)',
         'Tread depth sufficient',
@@ -71,7 +55,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'front-lights',
       title: 'Front Lights',
       icon: <PiHeadlights className="w-full h-full" />,
-      cameraPosition: [0, 20, 40],
       items: [
         'Headlights working (low and high beam)',
         'Turn signals functioning',
@@ -84,7 +67,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'rear-lights',
       title: 'Rear Lights',
       icon: <GiGearStick className="w-full h-full" />,
-      cameraPosition: [0, 20, -40],
       items: [
         'Brake lights working',
         'Tail lights functioning',
@@ -97,7 +79,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'mirrors',
       title: 'Mirrors & Windows',
       icon: <GiMirrorMirror className="w-full h-full" />,
-      cameraPosition: [40, 25, 15],
       items: [
         'Side mirrors clean and adjusted',
         'Rearview mirror adjusted properly',
@@ -110,7 +91,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'body',
       title: 'Body & Doors',
       icon: <FaCarSide className="w-full h-full" />,
-      cameraPosition: [45, 18, 0],
       items: [
         'All doors secure and lock properly',
         'No visible body damage',
@@ -123,7 +103,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'engine',
       title: 'Under the Hood',
       icon: <FaOilCan className="w-full h-full" />,
-      cameraPosition: [15, 30, 35],
       items: [
         'Oil level adequate (check dipstick)',
         'Coolant level sufficient',
@@ -138,7 +117,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'interior',
       title: 'Inside the Cab',
       icon: <GiCarSeat className="w-full h-full" />,
-      cameraPosition: [35, 22, 25],
       items: [
         'Steering operates smoothly',
         'Seatbelt functional (no frays)',
@@ -153,7 +131,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'safety',
       title: 'Safety Equipment',
       icon: <MdHealthAndSafety className="w-full h-full" />,
-      cameraPosition: [-35, 18, -25],
       items: [
         'First aid kit present',
         'First aid kit properly stocked',
@@ -166,7 +143,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'documentation',
       title: 'Documentation',
       icon: <TiDocumentText className="w-full h-full" />,
-      cameraPosition: [30, 18, 30],
       items: [
         'Insurance card present and current',
         'Registration present and current',
@@ -190,7 +166,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="text-white pt-4 pb-1 px-6">
+      <header className="text-white pt-2 pb-0 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
             Vehicle Safety Check
@@ -202,12 +178,12 @@ const VehicleSafetyCheck = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow px-6 pb-24 md:pb-8 -mt-4">
-        <div className="max-w-7xl mx-auto -mt-6">
+      <main className="flex-grow px-6 pb-24 md:pb-8 -mt-6">
+        <div className="max-w-7xl mx-auto -mt-8">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Floating 3D Model */}
-            <div className="relative h-[800px] -mt-4">
+            <div className="relative h-[800px] -mt-6">
               <Suspense
                 fallback={
                   <div className="h-full flex items-center justify-center glass-card-strong rounded-xl">
@@ -227,7 +203,6 @@ const VehicleSafetyCheck = ({ onBack }) => {
                   <spotLight position={[0, 50, 0]} intensity={1.5} angle={0.5} penumbra={1} />
 
                   <VehicleModel />
-                  <CameraController targetPosition={currentCheckpoint.cameraPosition} />
                 </Canvas>
               </Suspense>
             </div>
@@ -235,34 +210,34 @@ const VehicleSafetyCheck = ({ onBack }) => {
             {/* Right Column - Inspection Checkpoints Carousel */}
             <div className="flex flex-col h-[800px]">
               <div className="mb-4">
-                <h2 className="text-2xl font-bold text-white mb-1 drop-shadow">
+                <h2 className="text-3xl font-bold text-white mb-2 drop-shadow">
                   Inspection Checkpoints
                 </h2>
-                <p className="text-sm text-white/90 drop-shadow">
+                <p className="text-base text-white/90 drop-shadow">
                   {currentCheckpointIndex + 1} of {checkpoints.length}
                 </p>
               </div>
 
               {/* Carousel Card */}
               <div className="flex-1 flex flex-col">
-                <div className="glass-card-strong rounded-2xl shadow-2xl p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 text-ash-teal flex-shrink-0">
+                <div className="glass-card-strong rounded-2xl shadow-2xl p-8 flex-1 flex flex-col">
+                  <div className="flex items-center gap-5 mb-6">
+                    <div className="w-16 h-16 text-ash-teal flex-shrink-0">
                       {currentCheckpoint.icon}
                     </div>
-                    <h3 className="text-2xl font-bold text-ash-navy">
+                    <h3 className="text-3xl font-bold text-ash-navy">
                       {currentCheckpoint.title}
                     </h3>
                   </div>
 
                   <div className="flex-1 overflow-y-auto">
-                    <div className="bg-white/50 rounded-xl p-4">
-                      <h4 className="font-semibold text-ash-navy mb-3">What to check:</h4>
-                      <ul className="space-y-2">
+                    <div className="bg-white/50 rounded-xl p-6">
+                      <h4 className="font-bold text-ash-navy mb-4 text-lg">What to check:</h4>
+                      <ul className="space-y-3">
                         {currentCheckpoint.items.map((item, index) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <span className="text-ash-teal mt-0.5 flex-shrink-0 text-lg">✓</span>
-                            <span className="text-gray-700 text-sm">{item}</span>
+                          <li key={index} className="flex items-start gap-3">
+                            <span className="text-ash-teal mt-1 flex-shrink-0 text-2xl font-bold">✓</span>
+                            <span className="text-gray-700 text-base leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
