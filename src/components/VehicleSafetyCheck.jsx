@@ -45,6 +45,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'tires',
       title: 'Tires & Wheels',
       icon: <GiCarWheel className="w-full h-full" />,
+      iconColor: 'text-black',
       items: [
         'Tire inflation adequate (all 4)',
         'Tread depth sufficient',
@@ -57,6 +58,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'front-lights',
       title: 'Front Lights',
       icon: <PiHeadlights className="w-full h-full" />,
+      iconColor: 'text-yellow-500',
       items: [
         'Headlights working (low and high beam)',
         'Turn signals functioning',
@@ -69,6 +71,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'rear-lights',
       title: 'Rear Lights',
       icon: <GiGearStick className="w-full h-full" />,
+      iconColor: 'text-red-500',
       items: [
         'Brake lights working',
         'Tail lights functioning',
@@ -81,6 +84,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'mirrors',
       title: 'Mirrors & Windows',
       icon: <GiMirrorMirror className="w-full h-full" />,
+      iconColor: 'text-black',
       items: [
         'Side mirrors clean and adjusted',
         'Rearview mirror adjusted properly',
@@ -93,6 +97,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'body',
       title: 'Body & Doors',
       icon: <FaCarSide className="w-full h-full" />,
+      iconColor: 'text-black',
       items: [
         'All doors secure and lock properly',
         'No visible body damage',
@@ -105,6 +110,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'engine',
       title: 'Under the Hood',
       icon: <FaOilCan className="w-full h-full" />,
+      iconColor: 'text-black',
       items: [
         'Oil level adequate (check dipstick)',
         'Coolant level sufficient',
@@ -119,6 +125,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'interior',
       title: 'Inside the Cab',
       icon: <GiCarSeat className="w-full h-full" />,
+      iconColor: 'text-yellow-700',
       items: [
         'Steering operates smoothly',
         'Seatbelt functional (no frays)',
@@ -133,6 +140,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       id: 'safety',
       title: 'Safety Equipment',
       icon: <MdHealthAndSafety className="w-full h-full" />,
+      iconColor: 'text-red-500',
       items: [
         'First aid kit present',
         'First aid kit properly stocked',
@@ -230,7 +238,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
               >
                 {/* Checkpoint Icon and Title */}
                 <div className="flex items-center gap-5 mb-6">
-                  <div className="w-16 h-16 text-ash-teal flex-shrink-0">
+                  <div className={`w-16 h-16 ${currentCheckpoint.iconColor || 'text-ash-teal'} flex-shrink-0`}>
                     {currentCheckpoint.icon}
                   </div>
                   <h3 className="text-3xl font-bold text-ash-navy">

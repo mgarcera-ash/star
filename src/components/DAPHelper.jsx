@@ -15,6 +15,7 @@ const DAPHelper = ({ onBack }) => {
       id: 'transportation',
       title: 'Transportation Services',
       icon: <FaVanShuttle className="w-full h-full" />,
+      iconColor: 'text-blue-500',
       description: 'For transport requests and coordination',
       totalSteps: 5
     },
@@ -22,6 +23,7 @@ const DAPHelper = ({ onBack }) => {
       id: 'wellbeing',
       title: 'Senior Well-Being Check',
       icon: <TbOld className="w-full h-full" />,
+      iconColor: 'text-purple-500',
       description: 'For wellness visits and follow-ups',
       totalSteps: 5
     },
@@ -29,6 +31,7 @@ const DAPHelper = ({ onBack }) => {
       id: 'crisis',
       title: 'Crisis Response/Shelter Placement',
       icon: <GrEmergency className="w-full h-full" />,
+      iconColor: 'text-red-500',
       description: 'For emergency situations',
       totalSteps: 5
     }
@@ -2052,7 +2055,7 @@ const DAPHelper = ({ onBack }) => {
                     className="glass-card-strong rounded-2xl p-8 text-center
                              transform hover:scale-105 transition-all duration-200 hover:shadow-2xl"
                   >
-                    <div className="text-6xl mb-4 w-16 h-16 mx-auto flex items-center justify-center text-ash-teal">
+                    <div className={`text-6xl mb-4 w-16 h-16 mx-auto flex items-center justify-center ${template.iconColor || 'text-ash-teal'}`}>
                       {template.icon}
                     </div>
                     <h3 className="text-2xl font-bold text-ash-navy mb-3">

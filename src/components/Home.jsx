@@ -50,6 +50,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       title: 'Dispatch Scripts',
       description: 'Quick reference scripts for common scenarios',
       icon: <BsTelephoneInboundFill className="w-full h-full" />,
+      iconColor: 'text-yellow-500',
       gradient: 'from-ash-teal to-ash-accent',
       ready: true
     },
@@ -66,6 +67,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       title: 'Vehicle Safety Info',
       description: '3D interactive pre-trip and post-trip inspection',
       icon: <FaVanShuttle className="w-full h-full" />,
+      iconColor: 'text-blue-500',
       gradient: 'from-blue-500 to-ash-navy',
       ready: true
     },
@@ -123,7 +125,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                       className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
                                transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
                     >
-                      <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">{tool.icon}</span>
+                      <span className={`text-2xl w-8 h-8 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>{tool.icon}</span>
                       <span className="font-semibold text-ash-navy">{tool.title}</span>
                     </button>
                   )
@@ -167,7 +169,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="text-6xl mb-5 drop-shadow w-16 h-16 flex items-center justify-center text-ash-teal">
+                  <div className={`text-6xl mb-5 drop-shadow w-16 h-16 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
                     {tool.icon}
                   </div>
                   <h3 className="text-3xl text-ash-navy mb-3 font-bold">

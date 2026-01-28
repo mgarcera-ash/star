@@ -16,6 +16,7 @@ const DispatchScripts = ({ onBack }) => {
       title: 'Shelter Placement Request',
       category: 'Shelter',
       icon: <FaPersonShelter className="w-full h-full" />,
+      iconColor: 'text-orange-500',
       script: [
         "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
         "[Listen]",
@@ -35,6 +36,7 @@ const DispatchScripts = ({ onBack }) => {
       title: 'Transportation Request',
       category: 'Transport',
       icon: <FaVanShuttle className="w-full h-full" />,
+      iconColor: 'text-blue-500',
       script: [
         "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
         "[Listen]",
@@ -52,6 +54,7 @@ const DispatchScripts = ({ onBack }) => {
       title: 'Senior Well-Being Check',
       category: 'Well-Being',
       icon: <TbOld className="w-full h-full" />,
+      iconColor: 'text-purple-500',
       script: [
         "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
         "[Listen]",
@@ -70,6 +73,7 @@ const DispatchScripts = ({ onBack }) => {
       title: 'Crisis De-escalation',
       category: 'Crisis',
       icon: <GrEmergency className="w-full h-full" />,
+      iconColor: 'text-red-500',
       script: [
         "Thank you for calling A Safe Haven, this is [Your Name]. How can I help you?",
         "[Listen]",
@@ -142,7 +146,7 @@ const DispatchScripts = ({ onBack }) => {
                     className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
                              transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
                   >
-                    <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                    <span className={`text-2xl w-8 h-8 flex items-center justify-center ${scenario.iconColor || 'text-ash-teal'}`}>
                       {scenario.icon}
                     </span>
                     <span className="font-semibold text-ash-navy">{scenario.title}</span>
