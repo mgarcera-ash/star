@@ -165,13 +165,27 @@ const VehicleSafetyCheck = ({ onBack }) => {
     setCurrentCheckpointIndex((prev) => (prev === checkpoints.length - 1 ? 0 : prev + 1))
   }
 
+  const handleContainerClick = (e) => {
+    // Get the click position relative to the container
+    const rect = e.currentTarget.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const containerWidth = rect.width
+
+    // If clicked on left half, go previous; if right half, go next
+    if (clickX < containerWidth / 2) {
+      handlePrevious()
+    } else {
+      handleNext()
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="text-white pt-8 pb-4 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
-            Vehicle Safety Checks
+            Vehicle Safety Info
           </h1>
         </div>
       </header>
@@ -210,7 +224,10 @@ const VehicleSafetyCheck = ({ onBack }) => {
             {/* Right Column - Inspection Checkpoints Carousel */}
             <div className="flex flex-col h-[650px]">
               {/* Carousel Card */}
-              <div className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8">
+              <div
+                onClick={handleContainerClick}
+                className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8 cursor-pointer"
+              >
                 {/* Checkpoint Icon and Title */}
                 <div className="flex items-center gap-5 mb-6">
                   <div className="w-16 h-16 text-ash-teal flex-shrink-0">
@@ -234,45 +251,23 @@ const VehicleSafetyCheck = ({ onBack }) => {
                   </ul>
                 </div>
 
-                {/* Navigation with Pagination */}
-                <div className="flex items-center justify-between">
-                  <button
-                    onClick={handlePrevious}
-                    className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
-                    aria-label="Previous checkpoint"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Previous
-                  </button>
-
-                  {/* Pagination Dots */}
-                  <div className="flex justify-center gap-2">
-                    {checkpoints.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentCheckpointIndex(index)}
-                        className={`w-2.5 h-2.5 rounded-full transition-all ${
-                          index === currentCheckpointIndex
-                            ? 'bg-ash-teal w-8'
-                            : 'bg-gray-400 hover:bg-gray-500'
-                        }`}
-                        aria-label={`Go to checkpoint ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={handleNext}
-                    className="px-4 py-2 bg-ash-navy text-white rounded-xl hover:bg-ash-teal transition-colors flex items-center gap-2"
-                    aria-label="Next checkpoint"
-                  >
-                    Next
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
+                {/* Pagination Dots */}
+                <div className="flex justify-center gap-2">
+                  {checkpoints.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setCurrentCheckpointIndex(index)
+                      }}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        index === currentCheckpointIndex
+                          ? 'bg-ash-teal w-8'
+                          : 'bg-gray-400 hover:bg-gray-500'
+                      }`}
+                      aria-label={`Go to checkpoint ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
