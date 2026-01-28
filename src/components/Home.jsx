@@ -160,7 +160,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                 onClick={() => tool.ready && onNavigate(tool.id)}
                 disabled={!tool.ready}
                 className={`
-                  group relative overflow-hidden rounded-3xl p-8 text-left
+                  group relative overflow-hidden rounded-3xl p-8 text-left aspect-[9/16]
                   transform transition-all duration-300
                   ${tool.ready
                     ? 'glass-card-strong hover:scale-105 hover:shadow-2xl cursor-pointer shadow-xl'
