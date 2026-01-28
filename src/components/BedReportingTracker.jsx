@@ -36,7 +36,7 @@ const BedReportingTracker = ({ onBack }) => {
     {
       name: 'Evening',
       icon: <FiSunset className="w-full h-full" />,
-      iconColor: 'text-purple-500',
+      iconColor: 'text-orange-500',
       gradient: 'linear-gradient(135deg, #ff9a56 0%, #ff6a00 100%)',
       reporting: { start: 16, end: 17.5, label: '4:00 PM - 5:30 PM' },
       followup: { start: 17.5, end: 18.25, label: '5:30 PM - 6:15 PM' },
@@ -149,22 +149,22 @@ const BedReportingTracker = ({ onBack }) => {
                     animation: isActive ? 'pulse 2s ease-in-out infinite' : 'none'
                   }}
                 >
-                  {/* Gradient Header */}
-                  <div
-                    className="h-20 -mx-6 -mt-6 mb-5 rounded-t-2xl flex items-center justify-center relative overflow-hidden"
-                    style={{ background: cycle.gradient }}
-                  >
-                    <div className={`text-5xl w-12 h-12 flex items-center justify-center ${cycle.iconColor || 'text-white'}`}>{cycle.icon}</div>
+                  {/* Icon and Title Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className={`text-7xl w-20 h-20 flex items-center justify-center ${cycle.iconColor || 'text-ash-teal'}`}>
+                        {cycle.icon}
+                      </div>
+                      <h3 className="text-3xl font-bold text-ash-navy">
+                        {cycle.name}
+                      </h3>
+                    </div>
                     {isActive && (
-                      <div className="absolute top-2 right-2 bg-white/90 text-red-600 px-3 py-1 rounded-full text-xs font-bold">
+                      <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
                         LIVE
                       </div>
                     )}
                   </div>
-
-                  <h3 className="text-2xl font-bold text-ash-navy mb-5 text-center">
-                    {cycle.name}
-                  </h3>
 
                   {/* Reporting Period */}
                   <div className="mb-4">
@@ -257,9 +257,9 @@ const BedReportingTracker = ({ onBack }) => {
                 {cycles.map((cycle, i) => {
                   const status = getCycleStatus(cycle)
                   return (
-                    <div key={i} className="flex items-center gap-2">
-                      <span className={`text-2xl w-8 h-8 flex items-center justify-center ${cycle.iconColor || 'text-ash-teal'}`}>{cycle.icon}</span>
-                      <span className="font-bold text-ash-navy">{cycle.name}:</span>
+                    <div key={i} className="flex items-center gap-3">
+                      <span className={`text-4xl w-12 h-12 flex items-center justify-center ${cycle.iconColor || 'text-ash-teal'}`}>{cycle.icon}</span>
+                      <span className="font-bold text-ash-navy text-lg">{cycle.name}:</span>
                       <span className={`font-semibold ${
                         status.phase === 'complete' ? 'text-green-600' :
                         status.status === 'active' ? 'text-red-600' :
