@@ -9,33 +9,34 @@ import { MdHealthAndSafety } from 'react-icons/md'
 import { TiDocumentText } from 'react-icons/ti'
 
 // 3D Vehicle Model Component with auto-rotation
-function VehicleModel() {
+function VehicleModel({ onLoad }) {
   const modelRef = useRef()
+  const hasLoadedRef = useRef(false)
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
 
-  try {
-    const { scene } = useGLTF(`${import.meta.env.BASE_URL}assets/models/vehicle.glb`)
-
-    // Auto-rotate the model
-    useFrame((state, delta) => {
-      if (modelRef.current) {
-        modelRef.current.rotation.y += delta * 0.2 // Slow rotation
+  // Auto-rotate the model
+  useFrame((state, delta) => {
+    if (modelRef.current) {
+      // Call onLoad once when model is ready
+      if (!hasLoadedRef.current && onLoad) {
+        hasLoadedRef.current = true
+        onLoad()
       }
-    })
+      modelRef.current.rotation.y += delta * 0.2 // Slow rotation
+    }
+  })
 
-    return (
-      <group ref={modelRef}>
-        <primitive object={scene} scale={300} position={[0, -5, 0]} />
-      </group>
-    )
-  } catch (error) {
-    console.error('Error loading 3D model:', error)
-    return null
-  }
+  return (
+    <group ref={modelRef}>
+      <primitive object={scene} scale={300} position={[0, -5, 0]} />
+    </group>
+  )
 }
 
 // Main Component
 const VehicleSafetyCheck = ({ onBack }) => {
   const [currentCheckpointIndex, setCurrentCheckpointIndex] = useState(0)
+  const [isModelLoading, setIsModelLoading] = useState(true)
 
   // Inspection checkpoints
   const checkpoints = [
@@ -169,7 +170,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
       <header className="text-white pt-2 pb-0 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-impact drop-shadow-lg tracking-wide uppercase">
-            Vehicle Safety Check
+            Vehicle Safety Checks
           </h1>
         </div>
       </header>
@@ -181,43 +182,32 @@ const VehicleSafetyCheck = ({ onBack }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Floating 3D Model */}
             <div className="relative h-[800px] -mt-6">
-              <Suspense
-                fallback={
-                  <div className="h-full w-full flex items-center justify-center">
-                    <div className="glass-card-strong rounded-xl p-8 text-center">
-                      <div className="text-7xl mb-4 animate-spin">🔄</div>
-                      <div className="text-ash-navy text-2xl font-bold mb-2">Loading 3D Model</div>
-                      <div className="text-gray-600 text-base">Please wait while the vehicle loads...</div>
-                    </div>
+              {isModelLoading && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center">
+                  <div className="glass-card-strong rounded-xl p-8 text-center">
+                    <div className="text-7xl mb-4 animate-spin">🔄</div>
+                    <div className="text-ash-navy text-2xl font-bold mb-2">Loading 3D Model</div>
+                    <div className="text-gray-600 text-base">Please wait while the vehicle loads...</div>
                   </div>
-                }
-              >
-                <Canvas camera={{ position: [30, 18, 30], fov: 35 }}>
-                  <ambientLight intensity={1.2} />
-                  <directionalLight position={[30, 30, 20]} intensity={2} />
-                  <directionalLight position={[-30, 20, -20]} intensity={1.2} />
-                  <directionalLight position={[0, -20, 0]} intensity={0.8} />
-                  <spotLight position={[0, 50, 0]} intensity={1.5} angle={0.5} penumbra={1} />
+                </div>
+              )}
+              <Canvas camera={{ position: [30, 18, 30], fov: 35 }}>
+                <ambientLight intensity={1.2} />
+                <directionalLight position={[30, 30, 20]} intensity={2} />
+                <directionalLight position={[-30, 20, -20]} intensity={1.2} />
+                <directionalLight position={[0, -20, 0]} intensity={0.8} />
+                <spotLight position={[0, 50, 0]} intensity={1.5} angle={0.5} penumbra={1} />
 
-                  <VehicleModel />
-                </Canvas>
-              </Suspense>
+                <Suspense fallback={null}>
+                  <VehicleModel onLoad={() => setIsModelLoading(false)} />
+                </Suspense>
+              </Canvas>
             </div>
 
             {/* Right Column - Inspection Checkpoints Carousel */}
             <div className="flex flex-col h-[800px]">
               {/* Carousel Card */}
               <div className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8">
-                {/* Header */}
-                <div className="mb-6">
-                  <h2 className="text-3xl font-bold text-ash-navy mb-2">
-                    Inspection Checkpoints
-                  </h2>
-                  <p className="text-base text-gray-600">
-                    {currentCheckpointIndex + 1} of {checkpoints.length}
-                  </p>
-                </div>
-
                 {/* Checkpoint Icon and Title */}
                 <div className="flex items-center gap-5 mb-6">
                   <div className="w-16 h-16 text-ash-teal flex-shrink-0">

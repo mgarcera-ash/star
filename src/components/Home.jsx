@@ -63,7 +63,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
     },
     {
       id: 'vehicle',
-      title: 'Vehicle Safety Check',
+      title: 'Vehicle Safety Checks',
       description: '3D interactive pre-trip and post-trip inspection',
       icon: <FaVanShuttle className="w-full h-full" />,
       gradient: 'from-blue-500 to-ash-navy',
