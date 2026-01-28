@@ -153,17 +153,17 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
           </div>
 
           {/* Tool Cards Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {tools.map((tool) => (
               <button
                 key={tool.id}
                 onClick={() => tool.ready && onNavigate(tool.id)}
                 disabled={!tool.ready}
                 className={`
-                  group relative overflow-hidden rounded-2xl p-4 text-left aspect-[5/7]
-                  transform transition-all duration-300
+                  group relative overflow-hidden rounded-2xl p-8 text-center
+                  transform transition-all duration-200
                   ${tool.ready
-                    ? 'glass-card-strong hover:scale-105 hover:shadow-2xl cursor-pointer shadow-xl'
+                    ? 'glass-card-strong hover:scale-105 hover:shadow-2xl cursor-pointer'
                     : 'glass-card cursor-not-allowed opacity-50'
                   }
                 `}
@@ -177,14 +177,14 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                 )}
 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col h-full justify-center">
-                  <div className={`text-6xl mb-4 drop-shadow w-16 h-16 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
+                <div className="relative z-10">
+                  <div className={`text-6xl mb-4 drop-shadow w-16 h-16 mx-auto flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
                     {tool.icon}
                   </div>
-                  <h3 className="text-2xl text-ash-navy mb-3 font-bold leading-tight">
+                  <h3 className="text-2xl text-ash-navy mb-3 font-bold">
                     {tool.title}
                   </h3>
-                  <p className="text-gray-700 text-base leading-relaxed">
+                  <p className="text-gray-700">
                     {tool.description}
                   </p>
 
