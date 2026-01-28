@@ -3,6 +3,7 @@ import Home from './components/Home'
 import DispatchScripts from './components/DispatchScripts'
 import DAPHelper from './components/DAPHelper'
 import VehicleSafetyCheck from './components/VehicleSafetyCheck'
+import BedReportingTracker from './components/BedReportingTracker'
 import SpanishPhrases from './components/SpanishPhrases'
 import IntakeQuestionnaire from './components/IntakeQuestionnaire'
 
@@ -47,6 +48,8 @@ function App() {
         return <DAPHelper onBack={() => setCurrentView('home')} />
       case 'vehicle':
         return <VehicleSafetyCheck onBack={() => setCurrentView('home')} />
+      case 'bedreporting':
+        return <BedReportingTracker onBack={() => setCurrentView('home')} />
       case 'spanish':
         return <SpanishPhrases onBack={() => setCurrentView('home')} />
       case 'intake':

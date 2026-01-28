@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { BsTelephoneInboundFill, BsChatSquareDots } from 'react-icons/bs'
-import { FaNotesMedical } from 'react-icons/fa'
+import { FaNotesMedical, FaBed } from 'react-icons/fa'
 import { FaVanShuttle } from 'react-icons/fa6'
 import SearchOverlay from './SearchOverlay'
 
@@ -69,6 +69,15 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
       icon: <FaVanShuttle className="w-full h-full" />,
       iconColor: 'text-blue-500',
       gradient: 'from-blue-500 to-ash-navy',
+      ready: true
+    },
+    {
+      id: 'bedreporting',
+      title: 'Bed Reporting Tracker',
+      description: 'Live cycle status and countdown timers',
+      icon: <FaBed className="w-full h-full" />,
+      iconColor: 'text-purple-500',
+      gradient: 'from-purple-500 to-pink-500',
       ready: true
     },
     {
