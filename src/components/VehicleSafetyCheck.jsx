@@ -7,6 +7,7 @@ import { PiHeadlights } from 'react-icons/pi'
 import { FaCarSide, FaOilCan } from 'react-icons/fa'
 import { MdHealthAndSafety } from 'react-icons/md'
 import { TiDocumentText } from 'react-icons/ti'
+import { LuRefreshCw } from 'react-icons/lu'
 
 // 3D Vehicle Model Component with auto-rotation
 function VehicleModel({ onLoad }) {
@@ -181,11 +182,13 @@ const VehicleSafetyCheck = ({ onBack }) => {
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Floating 3D Model */}
-            <div className="relative h-[800px] -mt-6">
+            <div className="relative h-[650px] -mt-6">
               {isModelLoading && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center">
                   <div className="glass-card-strong rounded-xl p-8 text-center">
-                    <div className="text-7xl mb-4 animate-spin">🔄</div>
+                    <div className="text-7xl mb-4 animate-spin text-ash-teal flex justify-center">
+                      <LuRefreshCw />
+                    </div>
                     <div className="text-ash-navy text-2xl font-bold mb-2">Loading 3D Model</div>
                     <div className="text-gray-600 text-base">Please wait while the vehicle loads...</div>
                   </div>
@@ -205,7 +208,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
             </div>
 
             {/* Right Column - Inspection Checkpoints Carousel */}
-            <div className="flex flex-col h-[800px]">
+            <div className="flex flex-col h-[650px]">
               {/* Carousel Card */}
               <div className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8">
                 {/* Checkpoint Icon and Title */}
@@ -219,7 +222,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
                 </div>
 
                 {/* Checklist Items */}
-                <div className="flex-1 overflow-y-auto mb-6">
+                <div className="flex-1 overflow-y-auto mb-4">
                   <h4 className="font-bold text-ash-navy mb-4 text-lg">What to check:</h4>
                   <ul className="space-y-3">
                     {currentCheckpoint.items.map((item, index) => (
