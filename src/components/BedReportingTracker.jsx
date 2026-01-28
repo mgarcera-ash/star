@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import SearchOverlay from './SearchOverlay'
+import { FaMoon } from 'react-icons/fa'
+import { MdSunny } from 'react-icons/md'
+import { FiSunset } from 'react-icons/fi'
 
 const BedReportingTracker = ({ onBack }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -14,7 +17,7 @@ const BedReportingTracker = ({ onBack }) => {
   const cycles = [
     {
       name: 'Overnight',
-      emoji: '🌙',
+      icon: <FaMoon className="w-full h-full" />,
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       reporting: { start: 0, end: 1.5, label: '12:00 AM - 1:30 AM' },
       followup: { start: 1.5, end: 2.25, label: '1:30 AM - 2:15 AM' },
@@ -22,7 +25,7 @@ const BedReportingTracker = ({ onBack }) => {
     },
     {
       name: 'Morning',
-      emoji: '🌅',
+      icon: <MdSunny className="w-full h-full" />,
       gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
       reporting: { start: 8, end: 9.5, label: '8:00 AM - 9:30 AM' },
       followup: { start: 9.5, end: 10.25, label: '9:30 AM - 10:15 AM' },
@@ -30,7 +33,7 @@ const BedReportingTracker = ({ onBack }) => {
     },
     {
       name: 'Evening',
-      emoji: '🌆',
+      icon: <FiSunset className="w-full h-full" />,
       gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
       reporting: { start: 16, end: 17.5, label: '4:00 PM - 5:30 PM' },
       followup: { start: 17.5, end: 18.25, label: '5:30 PM - 6:15 PM' },
@@ -148,7 +151,7 @@ const BedReportingTracker = ({ onBack }) => {
                     className="h-20 -mx-6 -mt-6 mb-5 rounded-t-2xl flex items-center justify-center relative overflow-hidden"
                     style={{ background: cycle.gradient }}
                   >
-                    <div className="text-5xl">{cycle.emoji}</div>
+                    <div className="text-5xl w-12 h-12 text-white flex items-center justify-center">{cycle.icon}</div>
                     {isActive && (
                       <div className="absolute top-2 right-2 bg-white/90 text-red-600 px-3 py-1 rounded-full text-xs font-bold">
                         LIVE
@@ -163,7 +166,7 @@ const BedReportingTracker = ({ onBack }) => {
                   {/* Reporting Period */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="font-bold text-gray-700">Bed Reporting</div>
+                      <div className="font-bold text-gray-700">Bed Reporting Period</div>
                       {status.reportingComplete && (
                         <span className="text-green-500 text-xl">✓</span>
                       )}
@@ -185,7 +188,7 @@ const BedReportingTracker = ({ onBack }) => {
                   {/* Follow-up Period */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="font-bold text-gray-700">Follow-up Calls</div>
+                      <div className="font-bold text-gray-700">STAR Follow-Up w/ Non-Reporting</div>
                       {status.followupComplete && (
                         <span className="text-green-500 text-xl">✓</span>
                       )}
@@ -207,7 +210,7 @@ const BedReportingTracker = ({ onBack }) => {
                   {/* Portal Update */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <div className="font-bold text-gray-700">Portal Update</div>
+                      <div className="font-bold text-gray-700">Data Portal Update</div>
                       {status.phase === 'complete' && (
                         <span className="text-green-500 text-xl">✓</span>
                       )}
@@ -252,7 +255,7 @@ const BedReportingTracker = ({ onBack }) => {
                   const status = getCycleStatus(cycle)
                   return (
                     <div key={i} className="flex items-center gap-2">
-                      <span className="text-2xl">{cycle.emoji}</span>
+                      <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">{cycle.icon}</span>
                       <span className="font-bold text-ash-navy">{cycle.name}:</span>
                       <span className={`font-semibold ${
                         status.phase === 'complete' ? 'text-green-600' :
