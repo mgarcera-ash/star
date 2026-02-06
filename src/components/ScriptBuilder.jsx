@@ -9,6 +9,25 @@ const ScriptBuilder = ({ onBack }) => {
 
   const scenarios = [
     {
+      id: 'initial-311-call',
+      title: 'Initial Shelter Request (311)',
+      category: 'Shelter',
+      icon: <FaPersonShelter className="w-full h-full" />,
+      steps: [
+        "Hi, this is [name] with STAR. We got your 311 request for shelter. I need to confirm a few things to help get you placed. Is now a good time?",
+        "Can you confirm your full name and age? And where are you right now—are you outside, at a business, hospital, or somewhere else?",
+        "Are you able to walk on your own?",
+        "Is it just you, or do you have kids with you?",
+        "Do you have any disability that might affect your stay in a shelter?",
+        "[If yes: Ask what they need to make shelter work and how it relates to their disability. Document accommodation decision in Salesforce, HMIS, and email DFSSHomeless@cityofchicago.org]",
+        "Have you stayed in shelter before? Which ones?",
+        "Where did you stay last night?",
+        "[If stable: Ask if there's any reason they can't go back there. If they mention friends/family/church: Offer connection to someone who might help arrange that]",
+        "Okay, we're starting the placement process now. Just so you know, beds are limited right now, but we'll keep working on this and update you throughout the day. As long as you stay reachable and let us know if you move, we'll keep your case open until we find placement or you no longer need it.",
+        "Any questions about the process?"
+      ]
+    },
+    {
       id: 'shelter-placement',
       title: 'Shelter Placement Request',
       category: 'Shelter',
