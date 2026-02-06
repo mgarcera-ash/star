@@ -147,10 +147,10 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
           <div className="mb-10">
             <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-              {getGreeting()}, how can I help?
+              Welcome to the Program Guide
             </h2>
             <p className="text-lg text-white/90 drop-shadow">
-              Choose a tool below to get started.
+              Version 1. Updated February 2026.
             </p>
           </div>
 
