@@ -9,6 +9,8 @@ import { FaWandMagicSparkles } from 'react-icons/fa6'
 const DispatchScripts = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
   const [showScriptBuilder, setShowScriptBuilder] = useState(false)
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   const scenarios = [
     {
@@ -135,9 +137,10 @@ const DispatchScripts = ({ onBack }) => {
                 <button
                   onClick={() => setShowScriptBuilder(true)}
                   className="glass-card-strong px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl
-                           transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                           transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
+                           animate-fade-in-up"
                 >
-                  <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                  <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal transition-transform duration-200 hover:scale-125 hover:rotate-12">
                     <FaWandMagicSparkles className="w-full h-full" />
                   </span>
                   <div className="text-left">
@@ -156,14 +159,19 @@ const DispatchScripts = ({ onBack }) => {
               </div>
 
               <div className="flex gap-3 flex-wrap mb-6">
-                {scenarios.map((scenario) => (
+                {scenarios.map((scenario, index) => (
                   <button
                     key={scenario.id}
-                    onClick={() => setSelectedScenario(scenario)}
+                    onClick={() => {
+                      setSelectedScenario(scenario)
+                      setCurrentStep(0)
+                    }}
                     className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
-                             transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                             transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
+                             animate-fade-in-up"
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <span className={`text-2xl w-8 h-8 flex items-center justify-center ${scenario.iconColor || 'text-ash-teal'}`}>
+                    <span className={`text-2xl w-8 h-8 flex items-center justify-center transition-transform duration-200 group-hover:scale-110 ${scenario.iconColor || 'text-ash-teal'}`}>
                       {scenario.icon}
                     </span>
                     <span className="font-semibold text-ash-navy">{scenario.title}</span>
@@ -235,24 +243,101 @@ const DispatchScripts = ({ onBack }) => {
                 </p>
               </div>
 
-              <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
-                <ol className="space-y-5">
-                  {selectedScenario.script.map((step, index) => (
-                    <li key={index} className="flex">
-                      <span className="flex-shrink-0 w-10 h-10 bg-ash-teal text-white rounded-full
-                                     flex items-center justify-center font-bold text-base mr-5 mt-1 shadow-md">
-                        {index + 1}
+              <div className="glass-card-strong rounded-2xl shadow-2xl p-8 min-h-[400px] flex flex-col">
+                {/* Progress Indicator */}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="text-sm font-semibold text-ash-navy">
+                    Step {currentStep + 1} of {selectedScenario.script.length}
+                  </div>
+                  <div className="flex gap-1">
+                    {selectedScenario.script.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          index === currentStep
+                            ? 'w-8 bg-ash-teal'
+                            : index < currentStep
+                            ? 'w-2 bg-ash-teal/50'
+                            : 'w-2 bg-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Current Step Display */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div
+                    className={`transition-all duration-500 ${
+                      isTransitioning ? 'opacity-0 blur-sm scale-95' : 'opacity-100 blur-0 scale-100'
+                    }`}
+                  >
+                    <div className="flex items-start gap-5 max-w-3xl">
+                      <span className="flex-shrink-0 w-14 h-14 bg-ash-teal text-white rounded-full
+                                     flex items-center justify-center font-bold text-2xl shadow-lg">
+                        {currentStep + 1}
                       </span>
-                      <p className="flex-grow text-gray-800 text-lg leading-relaxed pt-2">
-                        {step.startsWith('[') ? (
-                          <span className="italic text-ash-accent font-semibold">{step}</span>
+                      <p className="flex-grow text-gray-800 text-2xl leading-relaxed pt-3">
+                        {selectedScenario.script[currentStep].startsWith('[') ? (
+                          <span className="italic text-ash-accent font-semibold">
+                            {selectedScenario.script[currentStep]}
+                          </span>
                         ) : (
-                          step
+                          selectedScenario.script[currentStep]
                         )}
                       </p>
-                    </li>
-                  ))}
-                </ol>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Navigation */}
+                <div className="mt-8 flex items-center justify-between border-t border-gray-200 pt-6">
+                  <button
+                    onClick={() => {
+                      if (currentStep > 0) {
+                        setIsTransitioning(true)
+                        setTimeout(() => {
+                          setCurrentStep(currentStep - 1)
+                          setIsTransitioning(false)
+                        }, 250)
+                      }
+                    }}
+                    disabled={currentStep === 0}
+                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+                      currentStep === 0
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-ash-navy text-white shadow-lg hover:shadow-xl hover:scale-105'
+                    }`}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      if (currentStep < selectedScenario.script.length - 1) {
+                        setIsTransitioning(true)
+                        setTimeout(() => {
+                          setCurrentStep(currentStep + 1)
+                          setIsTransitioning(false)
+                        }, 250)
+                      }
+                    }}
+                    disabled={currentStep === selectedScenario.script.length - 1}
+                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+                      currentStep === selectedScenario.script.length - 1
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-ash-teal text-white shadow-lg hover:shadow-xl hover:scale-105'
+                    }`}
+                  >
+                    Next
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
 </>
           )}
@@ -264,6 +349,7 @@ const DispatchScripts = ({ onBack }) => {
         onClick={() => {
           if (selectedScenario) {
             setSelectedScenario(null)
+            setCurrentStep(0)
           } else if (showScriptBuilder) {
             setShowScriptBuilder(false)
           } else {

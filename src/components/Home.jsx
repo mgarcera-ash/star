@@ -124,7 +124,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                 Recently Accessed
               </h3>
               <div className="flex gap-3 flex-wrap">
-                {recentlyAccessed.map((toolId) => {
+                {recentlyAccessed.map((toolId, idx) => {
                   const tool = tools.find(t => t.id === toolId)
                   if (!tool || !tool.ready) return null
                   return (
@@ -132,7 +132,9 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                       key={toolId}
                       onClick={() => onNavigate(toolId)}
                       className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
-                               transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                               transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
+                               animate-fade-in-up"
+                      style={{ animationDelay: `${idx * 75}ms` }}
                     >
                       <span className={`text-2xl w-8 h-8 flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>{tool.icon}</span>
                       <span className="font-semibold text-ash-navy">{tool.title}</span>
@@ -154,19 +156,20 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
           {/* Tool Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {tools.map((tool) => (
+            {tools.map((tool, index) => (
               <button
                 key={tool.id}
                 onClick={() => tool.ready && onNavigate(tool.id)}
                 disabled={!tool.ready}
                 className={`
                   group relative overflow-hidden rounded-2xl p-8 text-center
-                  transform transition-all duration-200
+                  transform transition-all duration-200 animate-fade-in-up
                   ${tool.ready
-                    ? 'glass-card-strong hover:scale-105 hover:shadow-2xl cursor-pointer'
+                    ? 'glass-card-strong hover:scale-110 active:scale-95 hover:shadow-2xl cursor-pointer'
                     : 'glass-card cursor-not-allowed opacity-50'
                   }
                 `}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Subtle Gradient Overlay on Hover */}
                 {tool.ready && (
@@ -178,10 +181,10 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className={`text-6xl mb-4 drop-shadow w-16 h-16 mx-auto flex items-center justify-center ${tool.iconColor || 'text-ash-teal'}`}>
+                  <div className={`text-6xl mb-4 drop-shadow w-16 h-16 mx-auto flex items-center justify-center transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6 ${tool.iconColor || 'text-ash-teal'}`}>
                     {tool.icon}
                   </div>
-                  <h3 className="text-2xl text-ash-navy mb-3 font-bold">
+                  <h3 className="text-2xl text-ash-navy mb-3 font-bold transition-colors duration-200 group-hover:text-ash-teal">
                     {tool.title}
                   </h3>
                   <p className="text-gray-700">

@@ -148,7 +148,7 @@ const ScriptBuilder = ({ onBack }) => {
         {/* Script Nodes */}
         <ol className="space-y-5">
         {nodes.map((node, index) => (
-          <li key={node.id} className="flex flex-col">
+          <li key={node.id} className="flex flex-col animate-fade-in-up" style={{ animationDelay: `${index * 50}ms` }}>
             <div className="flex">
               <span className="flex-shrink-0 w-10 h-10 bg-ash-teal text-white rounded-full
                              flex items-center justify-center font-bold text-base mr-5 mt-1 shadow-md">
@@ -169,7 +169,7 @@ const ScriptBuilder = ({ onBack }) => {
                 <button
                   onClick={() => setShowScenarioOptions(!showScenarioOptions)}
                   className="px-5 py-3 bg-ash-teal text-white rounded-xl shadow-lg hover:shadow-xl
-                           transform hover:scale-105 transition-all duration-200 flex items-center gap-2
+                           transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-2
                            font-semibold"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +182,7 @@ const ScriptBuilder = ({ onBack }) => {
                 {showScenarioOptions && (
                   <div className="mt-4 space-y-3">
                     <p className="text-sm font-semibold text-gray-600 mb-2">Select the type of call:</p>
-                    {scenarios.map((scenario) => (
+                    {scenarios.map((scenario, idx) => (
                       <button
                         key={scenario.id}
                         onClick={() => {
@@ -190,10 +190,11 @@ const ScriptBuilder = ({ onBack }) => {
                           setShowScenarioOptions(false)
                         }}
                         className="w-full glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
-                                 transform hover:scale-105 transition-all duration-200 flex items-center gap-3
-                                 text-left"
+                                 transform hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-3
+                                 text-left animate-fade-in-up"
+                        style={{ animationDelay: `${idx * 50}ms` }}
                       >
-                        <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal">
+                        <span className="text-2xl w-8 h-8 flex items-center justify-center text-ash-teal transition-transform duration-200 hover:scale-110">
                           {scenario.icon}
                         </span>
                         <span className="font-semibold text-ash-navy">{scenario.title}</span>
@@ -216,7 +217,7 @@ const ScriptBuilder = ({ onBack }) => {
               setShowScenarioOptions(false)
             }}
             className="px-5 py-3 bg-gray-500 text-white rounded-xl shadow-lg hover:shadow-xl
-                     transform hover:scale-105 transition-all duration-200 font-semibold"
+                     transform hover:scale-110 active:scale-95 transition-all duration-200 font-semibold"
           >
             Reset Script
           </button>
