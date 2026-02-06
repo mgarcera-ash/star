@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { FaPersonShelter, FaVanShuttle } from 'react-icons/fa6'
-import { TbOld } from 'react-icons/tb'
-import { GrEmergency } from 'react-icons/gr'
+import { FaPersonShelter } from 'react-icons/fa6'
 
 const ScriptBuilder = ({ onBack }) => {
   const [selectedScenario, setSelectedScenario] = useState(null)
@@ -25,73 +23,6 @@ const ScriptBuilder = ({ onBack }) => {
         "[If stable: Ask if there's any reason they can't go back there. If they mention friends/family/church: Offer connection to someone who might help arrange that]",
         "Okay, we're starting the placement process now. Just so you know, beds are limited right now, but we'll keep working on this and update you throughout the day. As long as you stay reachable and let us know if you move, we'll keep your case open until we find placement or you no longer need it.",
         "Any questions about the process?"
-      ]
-    },
-    {
-      id: 'shelter-placement',
-      title: 'Shelter Placement Request',
-      category: 'Shelter',
-      icon: <FaPersonShelter className="w-full h-full" />,
-      steps: [
-        "I understand you're requesting shelter placement. Let me gather some information to help you.",
-        "Can you tell me your name and date of birth?",
-        "Are you currently in a safe location?",
-        "Do you have any immediate medical needs?",
-        "Let me check availability in our system. Please hold for a moment.",
-        "[Check HMIS for bed availability]",
-        "I have availability at [Shelter Name]. They can accommodate you tonight.",
-        "Would you like me to arrange transportation, or can you get there on your own?",
-        "The address is [Address]. Check-in is between [Time]. Do you have any questions?"
-      ]
-    },
-    {
-      id: 'transport-request',
-      title: 'Transportation Request',
-      category: 'Transport',
-      icon: <FaVanShuttle className="w-full h-full" />,
-      steps: [
-        "I can help arrange transportation. Where are you currently located?",
-        "And where do you need to go?",
-        "Is this for immediate transport or scheduled for later?",
-        "Let me coordinate with our transport team. Can you provide a callback number?",
-        "[Contact transport coordinator]",
-        "We can have a driver to you within [timeframe]. The driver will call this number when they're nearby.",
-        "Please be ready at [meeting point]. Do you have any accessibility needs I should communicate to the driver?"
-      ]
-    },
-    {
-      id: 'well-being-check',
-      title: 'Senior Well-Being Check',
-      category: 'Well-Being',
-      icon: <TbOld className="w-full h-full" />,
-      steps: [
-        "I understand you're concerned about [person's name]. Can you tell me their address?",
-        "And what is your relationship to this person?",
-        "When was the last time you had contact with them?",
-        "What specifically are you concerned about?",
-        "[Assess urgency: immediate danger vs. welfare check]",
-        "Thank you for this information. I'm going to create a well-being check request.",
-        "Our team will attempt contact within [timeframe]. May I have your callback number?",
-        "We'll update you once we've made contact. If this becomes an emergency situation before then, please call 911."
-      ]
-    },
-    {
-      id: 'crisis-deescalation',
-      title: 'Crisis De-escalation',
-      category: 'Crisis',
-      icon: <GrEmergency className="w-full h-full" />,
-      steps: [
-        "[Use calm, measured tone]",
-        "I can hear that you're going through something difficult right now. I want to help.",
-        "Can you tell me what's happening?",
-        "[Active listening - repeat back what you hear]",
-        "That sounds really challenging. You've done the right thing by reaching out.",
-        "Are you in a safe place right now? Are you alone?",
-        "Do you have any immediate medical needs?",
-        "[If suicidal ideation: Assess imminent danger]",
-        "I want to connect you with someone who can provide the support you need.",
-        "[Warm transfer to crisis counselor if available, or provide crisis line: 988]",
-        "You don't have to go through this alone. Help is available."
       ]
     }
   ]
