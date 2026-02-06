@@ -62,7 +62,7 @@ const ScriptBuilder = ({ onBack }) => {
   return (
     <>
       {/* Tip */}
-      <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
+      <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-3xl">
         <p className="text-base text-gray-800 leading-relaxed">
           <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member you have <strong>power</strong> because you hold the information needed to get someone to safety. People who have been living in crisis may not have spare patience to give you, even if you give them all of yours.
           <br /><br />
@@ -70,7 +70,7 @@ const ScriptBuilder = ({ onBack }) => {
         </p>
       </div>
 
-      <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
+      <div className="glass-card-strong rounded-3xl shadow-2xl p-8">
         <div className="mb-6">
           <h3 className="text-2xl font-bold text-ash-navy mb-2">Script Builder</h3>
           <p className="text-gray-600">Build your call script step-by-step based on the caller's needs</p>
@@ -99,7 +99,7 @@ const ScriptBuilder = ({ onBack }) => {
               <div className="ml-14 mt-4">
                 <button
                   onClick={() => setShowScenarioOptions(!showScenarioOptions)}
-                  className="px-5 py-3 bg-ash-teal text-white rounded-xl shadow-lg hover:shadow-xl
+                  className="px-5 py-3 bg-ash-teal text-white rounded-2xl shadow-lg hover:shadow-xl
                            transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-2
                            font-semibold"
                 >
@@ -120,7 +120,7 @@ const ScriptBuilder = ({ onBack }) => {
                           setSelectedScenario(scenario.id)
                           setShowScenarioOptions(false)
                         }}
-                        className="w-full glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
+                        className="w-full glass-card-strong px-5 py-3 rounded-3xl shadow-lg hover:shadow-xl
                                  transform hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-3
                                  text-left animate-fade-in-up"
                         style={{ animationDelay: `${idx * 50}ms` }}
@@ -147,7 +147,7 @@ const ScriptBuilder = ({ onBack }) => {
               setSelectedScenario(null)
               setShowScenarioOptions(false)
             }}
-            className="px-5 py-3 bg-gray-500 text-white rounded-xl shadow-lg hover:shadow-xl
+            className="px-5 py-3 bg-gray-500 text-white rounded-2xl shadow-lg hover:shadow-xl
                      transform hover:scale-110 active:scale-95 transition-all duration-200 font-semibold"
           >
             Reset Script

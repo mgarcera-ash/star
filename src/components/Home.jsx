@@ -131,7 +131,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                     <button
                       key={toolId}
                       onClick={() => onNavigate(toolId)}
-                      className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
+                      className="glass-card-strong px-5 py-3 rounded-3xl shadow-lg hover:shadow-xl
                                transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
                                animate-fade-in-up"
                       style={{ animationDelay: `${idx * 75}ms` }}
@@ -147,7 +147,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
 
           <div className="mb-10">
             <h2 className="text-3xl font-semibold text-white mb-3 drop-shadow">
-              Welcome to the Program Guide
+              Welcome to the Program Guide.
             </h2>
             <p className="text-lg text-white/90 drop-shadow">
               Version 1. Updated February 2026.
@@ -162,7 +162,7 @@ const Home = ({ onNavigate, recentlyAccessed = [] }) => {
                 onClick={() => tool.ready && onNavigate(tool.id)}
                 disabled={!tool.ready}
                 className={`
-                  group relative overflow-hidden rounded-2xl p-8 text-center
+                  group relative overflow-hidden rounded-3xl p-8 text-center
                   transform transition-all duration-200 animate-fade-in-up
                   ${tool.ready
                     ? 'glass-card-strong hover:scale-110 active:scale-95 hover:shadow-2xl cursor-pointer'

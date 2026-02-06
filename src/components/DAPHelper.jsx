@@ -2052,7 +2052,7 @@ const DAPHelper = ({ onBack }) => {
                   <button
                     key={template.id}
                     onClick={() => handleTemplateSelect(template)}
-                    className="glass-card-strong rounded-2xl p-8 text-center
+                    className="glass-card-strong rounded-3xl p-8 text-center
                              transform hover:scale-105 transition-all duration-200 hover:shadow-2xl"
                   >
                     <div className={`text-6xl mb-4 w-16 h-16 mx-auto flex items-center justify-center ${template.iconColor || 'text-ash-teal'}`}>
@@ -2069,7 +2069,7 @@ const DAPHelper = ({ onBack }) => {
               </div>
 
               {/* Privacy Notice */}
-              <div className="mt-8 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
+              <div className="mt-8 glass-card-strong border-l-4 border-ash-teal p-6 rounded-3xl">
                 <p className="text-base text-gray-800 leading-relaxed">
                   <strong className="text-ash-teal">Privacy Notice:</strong> This tool runs entirely in your browser.
                   No data is stored or sent to any server. When you refresh the page, everything is cleared.
@@ -2083,7 +2083,7 @@ const DAPHelper = ({ onBack }) => {
               {/* Left: Form Content (2/3 width on desktop) */}
               <div className="lg:col-span-2">
                 {/* Progress Indicator */}
-                <div className="mb-6 glass-card-strong rounded-2xl p-4">
+                <div className="mb-6 glass-card-strong rounded-3xl p-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-ash-navy">
                       Step {currentStep} of {selectedTemplate.totalSteps}
@@ -2101,7 +2101,7 @@ const DAPHelper = ({ onBack }) => {
                 </div>
 
                 {/* Step Content */}
-                <div className="glass-card-strong rounded-2xl shadow-2xl p-8">
+                <div className="glass-card-strong rounded-3xl shadow-2xl p-8">
                   <h2 className="text-3xl font-bold text-ash-navy mb-6">
                     {currentStep === 1 && 'DATA Section'}
                     {currentStep === 2 && 'DATA Section (continued)'}
@@ -2116,7 +2116,7 @@ const DAPHelper = ({ onBack }) => {
                   <div className="mt-8 flex gap-4">
                     <button
                       onClick={handleBack}
-                      className="px-6 py-3 bg-gray-500 text-white rounded-xl shadow-lg hover:shadow-xl
+                      className="px-6 py-3 bg-gray-500 text-white rounded-2xl shadow-lg hover:shadow-xl
                                transform hover:scale-105 transition-all duration-200 font-semibold"
                     >
                       ← Back
@@ -2124,7 +2124,7 @@ const DAPHelper = ({ onBack }) => {
                     {currentStep < selectedTemplate.totalSteps ? (
                       <button
                         onClick={handleNext}
-                        className="px-6 py-3 bg-ash-teal text-white rounded-xl shadow-lg hover:shadow-xl
+                        className="px-6 py-3 bg-ash-teal text-white rounded-2xl shadow-lg hover:shadow-xl
                                  transform hover:scale-105 transition-all duration-200 font-semibold"
                       >
                         Next →
@@ -2134,7 +2134,7 @@ const DAPHelper = ({ onBack }) => {
                         <button
                           onClick={handleCopyNote}
                           disabled={!getQualityChecks().every(c => c.passed)}
-                          className={`px-6 py-3 text-white rounded-xl shadow-lg hover:shadow-xl
+                          className={`px-6 py-3 text-white rounded-2xl shadow-lg hover:shadow-xl
                                    transform hover:scale-105 transition-all duration-200 font-semibold
                                    ${getQualityChecks().every(c => c.passed)
                                      ? 'bg-ash-teal'
@@ -2144,7 +2144,7 @@ const DAPHelper = ({ onBack }) => {
                         </button>
                         <button
                           onClick={handleStartNew}
-                          className="px-6 py-3 bg-gray-500 text-white rounded-xl shadow-lg hover:shadow-xl
+                          className="px-6 py-3 bg-gray-500 text-white rounded-2xl shadow-lg hover:shadow-xl
                                    transform hover:scale-105 transition-all duration-200 font-semibold"
                         >
                           Start New Note
@@ -2157,7 +2157,7 @@ const DAPHelper = ({ onBack }) => {
 
               {/* Right: Preview Panel (1/3 width on desktop) */}
               <div className="lg:col-span-1">
-                <div className="glass-card-strong rounded-2xl shadow-2xl p-6 sticky top-6">
+                <div className="glass-card-strong rounded-3xl shadow-2xl p-6 sticky top-6">
                   <h3 className="text-xl font-bold text-ash-navy mb-4 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

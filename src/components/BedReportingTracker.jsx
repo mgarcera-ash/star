@@ -140,7 +140,7 @@ const BedReportingTracker = ({ onBack }) => {
               return (
                 <div
                   key={i}
-                  className={`glass-card-strong rounded-2xl p-6 shadow-lg border-4 transition-all duration-300 ${
+                  className={`glass-card-strong rounded-3xl p-6 shadow-lg border-4 transition-all duration-300 ${
                     isActive
                       ? 'border-ash-teal shadow-2xl scale-105'
                       : 'border-transparent'
@@ -250,7 +250,7 @@ const BedReportingTracker = ({ onBack }) => {
           </div>
 
           {/* Quick Summary */}
-          <div className="glass-card-strong rounded-xl shadow-lg p-6">
+          <div className="glass-card-strong rounded-3xl shadow-lg p-6">
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-4">Today's Progress</div>
               <div className="flex justify-center gap-8 flex-wrap">

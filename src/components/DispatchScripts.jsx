@@ -55,7 +55,7 @@ const DispatchScripts = ({ onBack }) => {
                 </h2>
                 <button
                   onClick={() => setShowScriptBuilder(true)}
-                  className="glass-card-strong px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl
+                  className="glass-card-strong px-6 py-4 rounded-3xl shadow-lg hover:shadow-xl
                            transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
                            animate-fade-in-up"
                 >
@@ -85,7 +85,7 @@ const DispatchScripts = ({ onBack }) => {
                       setSelectedScenario(scenario)
                       setCurrentStep(0)
                     }}
-                    className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl
+                    className="glass-card-strong px-5 py-3 rounded-3xl shadow-lg hover:shadow-xl
                              transform hover:scale-110 active:scale-95 transition-all duration-200 flex items-center gap-3
                              animate-fade-in-up"
                     style={{ animationDelay: `${index * 50}ms` }}
@@ -99,7 +99,7 @@ const DispatchScripts = ({ onBack }) => {
 
                 {/* More Button */}
                 <button
-                  className="glass-card-strong px-5 py-3 rounded-2xl shadow-lg
+                  className="glass-card-strong px-5 py-3 rounded-3xl shadow-lg
                            opacity-50 cursor-not-allowed flex items-center gap-3"
                   disabled
                 >
@@ -154,7 +154,7 @@ const DispatchScripts = ({ onBack }) => {
                 </div>
               </div>
 
-              <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-2xl">
+              <div className="mb-6 glass-card-strong border-l-4 border-ash-teal p-6 rounded-3xl">
                 <p className="text-base text-gray-800 leading-relaxed">
                   <strong className="text-ash-teal">Tip:</strong> <strong>Active listening and empathy are crucial</strong>. Remember: As A Safe Haven team member you have <strong>power</strong> because you hold the information needed to get someone to safety. People who have been living in crisis may not have spare patience to give you, even if you give them all of yours.
                   <br /><br />
@@ -162,7 +162,7 @@ const DispatchScripts = ({ onBack }) => {
                 </p>
               </div>
 
-              <div className="glass-card-strong rounded-2xl shadow-2xl p-8 min-h-[400px] flex flex-col">
+              <div className="glass-card-strong rounded-3xl shadow-2xl p-8 min-h-[400px] flex flex-col">
                 {/* Progress Indicator */}
                 <div className="mb-6 flex items-center justify-between">
                   <div className="text-sm font-semibold text-ash-navy">
@@ -222,7 +222,7 @@ const DispatchScripts = ({ onBack }) => {
                       }
                     }}
                     disabled={currentStep === 0}
-                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+                    className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-200 flex items-center gap-2 ${
                       currentStep === 0
                         ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                         : 'bg-ash-navy text-white shadow-lg hover:shadow-xl hover:scale-105'
@@ -245,7 +245,7 @@ const DispatchScripts = ({ onBack }) => {
                       }
                     }}
                     disabled={currentStep === selectedScenario.script.length - 1}
-                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+                    className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-200 flex items-center gap-2 ${
                       currentStep === selectedScenario.script.length - 1
                         ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                         : 'bg-ash-teal text-white shadow-lg hover:shadow-xl hover:scale-105'

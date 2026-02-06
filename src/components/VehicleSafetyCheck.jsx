@@ -207,7 +207,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
             <div className="relative h-[650px] -mt-6">
               {isModelLoading && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center">
-                  <div className="glass-card-strong rounded-xl p-8 text-center">
+                  <div className="glass-card-strong rounded-3xl p-8 text-center">
                     <div className="text-7xl mb-4 animate-spin text-ash-teal flex justify-center">
                       <LuRefreshCw />
                     </div>
@@ -234,7 +234,7 @@ const VehicleSafetyCheck = ({ onBack }) => {
               {/* Carousel Card */}
               <div
                 onClick={handleContainerClick}
-                className="flex-1 flex flex-col glass-card-strong rounded-2xl shadow-2xl p-8 cursor-pointer"
+                className="flex-1 flex flex-col glass-card-strong rounded-3xl shadow-2xl p-8 cursor-pointer"
               >
                 {/* Checkpoint Icon and Title */}
                 <div className="flex items-center gap-5 mb-6">
